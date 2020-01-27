@@ -15,4 +15,7 @@ CHIP Mux {
 
     PARTS:
     // Put your code here:
+    And(a=sel, b=sel, out=andSel); //returns a input if
+    Nand(a=andSel, b=)
+
 }
