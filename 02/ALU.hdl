@@ -66,13 +66,8 @@ CHIP ALU {
    Mux16(a=calculated, b=notOut, sel=no, out=out, out[15]=ng, out[0..7]=out1, out[8..15]=out2); //final output
 
    //zr
-  // Mux16(a=notOut, b=calculated, sel=no, out[0..7]=out1, out[8..15]=out2);//for zr
    Or8Way(in=out1, out=or1);
    Or8Way(in=out2, out=or2);
    Or(a=or1, b=or2, out=orBoth); //if something is 1 then the whole thing is 1
    Not(in=orBoth, out=zr); //therefore is nothing is out == 0 -> !orBoth
-
-   //ng
-   //Mux16(a=notOut, b=calculated, sel=no, out[0]=outLast, out[1..15]=outFirst);//for ng
-   //Mux(a=false, b=true, sel=outLast, out=ng);
 }
