@@ -55,10 +55,13 @@ CHIP ALU {
    //if it's chosen, then it's negated
    //results in negated version or (normal version or 0 version)
    //calculated x or y
+   //invert + 1
    Not16(in=x, out=notx); //nx x = !x
-   Mux16(a=notx, b=mux16x, sel=nx, out=calcX); 
+   Mux16(a=notx, b=mux16x, sel=nx, out=calc1); 
    Not16(in=y, out=noty); //ny y = !y
-   Mux16(a=noty, b=mux167, sel=ny, out=calcY);
+   Mux16(a=noty, b=mux16y, sel=ny, out=calc2);
+   Inc16(in=calc1, out=calcX); //+1
+   Inc16(in=calc2, out=calcY);
 
    //f
    And16(a=calcX, b=calcY, out=andVal); 
@@ -67,7 +70,13 @@ CHIP ALU {
 
    //no
    Not16(in=calculated, out=notOut);
-   Mux16(a=notOut, b=calculated, sel=no, out=out);
+   Mux16(a=notOut, b=calculated, sel=no, out[0..7]=out1, out[8..15]=out2, out=out);
 
-   //out value zr
+   //zr
+   Or8Way(in=out1, out=or1);
+   Or8Way(in=out2, out=or2);
+   Or(a=or1, b=or2, out=orBoth);
+   Not(in=orBoth, out=zr);
+   //ng
+   Mux(a=false, b=true, sel=orBoth, out=ng);
 }
