@@ -44,16 +44,17 @@ CHIP ALU {
     PARTS:
    // Put you code here:
    //0 false, 1 true
+   //mux 0 a, 1 b
 
    //x
    Mux16(a=x, b=false, sel=zx, out=mux16x); //zx
    Not16(in=mux16x, out=notx); //nx
-   Mux16(a=notx, b=mux16x, sel=nx, out=calcX); //results in negated version or (normal version or 0 version
+   Mux16(a=mux16x, b=notx, sel=nx, out=calcX); //results in negated version or (normal version or 0 version
 
    //y
    Mux16(a=y, b=false, sel=zy, out=mux16y); //zy
    Not16(in=mux16y, out=noty); //ny y = !y
-   Mux16(a=noty, b=mux16y, sel=ny, out=calcY); //results in negated version or (normal version or 0 version)
+   Mux16(a=mux16y, b=noty, sel=ny, out=calcY); //results in negated version or (normal version or 0 version)
 
    //f
    And16(a=calcX, b=calcY, out=andVal); 
@@ -62,16 +63,16 @@ CHIP ALU {
 
    //no
    Not16(in=calculated, out=notOut);
-   Mux16(a=notOut, b=calculated, sel=no, out=out);
+   Mux16(a=calculated, b=notOut, sel=no, out=out, out[15]=ng, out[0..7]=out1, out[8..15]=out2); //final output
 
    //zr
-   Mux16(a=notOut, b=calculated, sel=no, out[0..7]=out1, out[8..15]=out2);//for zr
+  // Mux16(a=notOut, b=calculated, sel=no, out[0..7]=out1, out[8..15]=out2);//for zr
    Or8Way(in=out1, out=or1);
    Or8Way(in=out2, out=or2);
-   Or(a=or1, b=or2, out=orBoth);
-   Not(in=orBoth, out=zr);
+   Or(a=or1, b=or2, out=orBoth); //if something is 1 then the whole thing is 1
+   Not(in=orBoth, out=zr); //therefore is nothing is out == 0 -> !orBoth
 
    //ng
-   Mux16(a=notOut, b=calculated, sel=no, out[15]=outLast, out[0..14]=outFirst);//for ng
-   Mux(a=false, b=true, sel=outLast, out=ng);
+   //Mux16(a=notOut, b=calculated, sel=no, out[0]=outLast, out[1..15]=outFirst);//for ng
+   //Mux(a=false, b=true, sel=outLast, out=ng);
 }
