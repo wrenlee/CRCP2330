@@ -43,15 +43,31 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+   //0 false, 1 true
+
+   //zs
+   //z 0 = normal
+   //z 1 = 0
    Mux16(a=x, b=false, sel=zx, out=mux16x); //zx x = 0
+   Mux16(a=y, b=false, sel=zy, out=mux16y); //zy y = 0
 
+   //negate
+   //if it's chosen, then it's negated
+   //results in negated version or (normal version or 0 version)
+   //calculated x or y
    Not16(in=x, out=notx); //nx x = !x
-   Mux16(a=notx, b=false, sel=nx)
-
-   Mux16(a=y, b=false, sel=zy, out=mux16x); //zy y = 0
-
+   Mux16(a=notx, b=mux16x, sel=nx, out=calcX); 
    Not16(in=y, out=noty); //ny y = !y
-   Mux16(a=noty, )
+   Mux16(a=noty, b=mux167, sel=ny, out=calcY);
 
+   //f
+   And16(a=calcX, b=calcY, out=andVal); 
+   Add16(a=calcX, b=calcY, out=addVal);
+   Mux16(a=addVal, b=andVal, sel=f, out=calculated);//f 0 and, f 1 add
 
+   //no
+   Not16(in=calculated, out=notOut);
+   Mux16(a=notOut, b=calculated, sel=no, out=out);
+
+   //out value zr
 }
