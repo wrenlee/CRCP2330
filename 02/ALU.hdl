@@ -64,6 +64,7 @@ CHIP ALU {
    //no
    Not16(in=calculated, out=notOut);
    Mux16(a=calculated, b=notOut, sel=no, out=out, out[15]=ng, out[0..7]=out1, out[8..15]=out2); //final output
+   //out 15 is the most signficant = sign bit
 
    //zr
    Or8Way(in=out1, out=or1);
