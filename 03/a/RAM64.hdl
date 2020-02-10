@@ -16,4 +16,20 @@ CHIP RAM64 {
 
     PARTS:
     // Put your code here:
+    //arrays read largest to smallest, msm -> lsb
+    DMux8Way(in=load, sel=address[3..5], a=dmuxa, b=dmuxb, c=dmuxc, d=dmuxd, e=dmuxe, f=dmuxf, g=dmuxg, h=dmuxh); //send load to which of the msb
+
+    //8 ram8s
+    //in[16], load, address[3], out[16]
+    //lsb
+    RAM8(in=in, load=dmuxa, address=address[0..2], out=out1);
+    RAM8(in=in, load=dmuxb, address=address[0..2], out=out2);
+    RAM8(in=in, load=dmuxc, address=address[0..2], out=out3);
+    RAM8(in=in, load=dmuxd, address=address[0..2], out=out4);
+    RAM8(in=in, load=dmuxe, address=address[0..2], out=out5);
+    RAM8(in=in, load=dmuxf, address=address[0..2], out=out6);
+    RAM8(in=in, load=dmuxg, address=address[0..2], out=out7);
+    RAM8(in=in, load=dmuxh, address=address[0..2], out=out8);
+
+    Mux8Way16(a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, sel=address[3..5], out=out);
 }
