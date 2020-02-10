@@ -16,4 +16,17 @@ CHIP RAM4K {
 
     PARTS:
     // Put your code here:
+    //imma just keep copy/pasting my previous chips because they work... sorry for the weird commit history, dave but that's what i did
+
+    DMux8Way(in=load, sel=address[9..11], a=dmuxa, b=dmuxb, c=dmuxc, d=dmuxd, e=dmuxe, f=dmuxf, g=dmuxg, h=dmuxh);
+    RAM512(in=in, load=dmuxa, address=address[0..8], out=out1);
+    RAM512(in=in, load=dmuxb, address=address[0..8], out=out2);
+    RAM512(in=in, load=dmuxc, address=address[0..8], out=out3);
+    RAM512(in=in, load=dmuxd, address=address[0..8], out=out4);
+    RAM512(in=in, load=dmuxe, address=address[0..8], out=out5);
+    RAM512(in=in, load=dmuxf, address=address[0..8], out=out6);
+    RAM512(in=in, load=dmuxg, address=address[0..8], out=out7);
+    RAM512(in=in, load=dmuxh, address=address[0..8], out=out8);
+
+    Mux8Way16(a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, sel=address[9..11], out=out);
 }
