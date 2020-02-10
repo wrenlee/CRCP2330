@@ -15,4 +15,7 @@ CHIP Bit {
 
     PARTS:
     // Put your code here:
+    //one of the outs has to feed into the in
+    Mux(a=q, b=in, sel=load, out=muxOut); //sel 1 = write new input
+    DFF(in=muxOut, out=q, out=out); //there needs to be an out value
 }
