@@ -15,28 +15,24 @@
 //call r2 @r2
 //set d to r2 d = r2
 
-//variables for counter (i) and prod and n (r1)
-//@i
-//M = 0 //sets i to 0
+//r0 value to add by
+//r1 counter value
+//r2 product
+
+//variables for prod
 @prod
 M = 0 //sets prod which will hold product to 0
-@R1
-D = M //sets memory pull from r1 to data register
-@n
-M = D //puts data register into memory of n variable
-//now i = 0, prod = 0, n = r1
 
 (LOOP)
 @R0
 D = M //calls up r0 to be added in the data register
 @prod
 M = D + M //adds r0 to prod value
-//@i
-//D = D + 1 //increment i
-@n
-D = D - 1 //decreases n
+@R1
+D = M //sets memory value to d
+D = D - 1 //decreases r1 (n)
 @LOOP
-D; JEQ //if data register (aka n) is equal to 0, jump to loop
+D; JGT //if data register (aka n) is greater than 0 (i > n), jump to loop it again
 
 
 @prod
