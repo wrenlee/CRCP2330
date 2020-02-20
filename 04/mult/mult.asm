@@ -31,6 +31,8 @@ M = D + M //adds r0 to prod value
 D = M //sets memory value to d
 D = D - 1 //decreases r1 (n)
 M = D
+@END
+D; JEQ //go to end
 @LOOP
 D; JGT //if data register (d) is greater than 0 (i > n), jump to loop it again
 
