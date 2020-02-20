@@ -19,6 +19,9 @@
 //r1 counter value
 //r2 product
 
+@R2
+M = 0 //sets total to 0 just in case
+
 (LOOP)
 @R0
 D = M //calls up r0 to be added in the data register
