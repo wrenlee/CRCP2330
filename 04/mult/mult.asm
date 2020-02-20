@@ -19,26 +19,17 @@
 //r1 counter value
 //r2 product
 
-//variables for prod
-@prod
-M = 0 //sets prod which will hold product to 0
-
 (LOOP)
 @R0
 D = M //calls up r0 to be added in the data register
-@prod
+@R2
 M = D + M //adds r0 to prod value
 @R1
 D = M //sets memory value to d
 D = D - 1 //decreases r1 (n)
+M = D
 @LOOP
-D; JGT //if data register (aka n) is greater than 0 (i > n), jump to loop it again
-
-
-@prod
-D = M //sets memory of prod to the data register
-@R2 
-M = D //pushes product into the r2 slot
+D; JGT //if data register (d) is greater than 0 (i > n), jump to loop it again
 
 (END)
 @END
