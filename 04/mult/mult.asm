@@ -19,29 +19,35 @@
 //r1 counter value
 //r2 product
 
-@R2
-M = 0 //sets total to 0 just in case
+@prod
+M = 0 //sets total to 0
 
 @R1
 D = M
-@LOOP
-D; JGT //tests to see if r1 has values in it or not
+@counter
+M = D //sets counter to r1
 
-(START)
 (LOOP)
+@counter
+D = M
+@END
+D;JEQ //checks to see if counter is 0
+
 @R0
 D = M //calls up r0 to be added in the data register
-@R2
-M = D + M //adds r0 to prod value
-@R1
-D = M //sets memory value to d
-D = D - 1 //decreases r1 (n)
-M = D
-@END
-D; JEQ //go to end if r1 is 0
-@LOOP
-D; JGT //if data register (d) is greater than 0 (i > n), jump to loop it again
 
-//(END)
-//@END
-//0; JMP //terminate program through loop to end constantly
+@prod
+M = M + D //adds r0 to prod value
+
+@counter
+M = M - 1 //decreases counter
+
+@LOOP
+0; JMP //loop to top
+//loop ends
+
+(END)
+@prod
+D = M
+@R2
+M = D //setting product to r2
