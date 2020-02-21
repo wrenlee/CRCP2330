@@ -42,6 +42,6 @@ D; JEQ //go to end if r1 is 0
 @LOOP
 D; JGT //if data register (d) is greater than 0 (i > n), jump to loop it again
 
-(END)
-@END
-0; JMP //terminate program through loop to end constantly
+//(END)
+//@END
+//0; JMP //terminate program through loop to end constantly
