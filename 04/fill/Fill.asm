@@ -19,12 +19,30 @@
 //(screenLoop) to go through all the pixels
 //sCounter for the 
 
+@SCREEN
+D = A //pulls the address register since the screen is a whole register by itself
+@pixel //pixel variable
+M = D
+
+(LOOP)
 @KBD //keyboard
-(KLOOP)
-@KLOOP
+D = M
+@WHITEOUT
 M; JEQ //if m is = 0
+@BLACKOUT
+M; JGT //m = 1
 
 //black out
-
+(BLACKOUT)
+@pixel
+M = 1 //black
 
 //white out
+(WHITEOUT)
+@pixel
+M = 0
+
+
+
+@LOOP
+D; //loop to the top
