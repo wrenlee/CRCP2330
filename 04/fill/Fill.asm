@@ -12,3 +12,8 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
+
+//@keyboard
+//(KEYLOOP) if the m is JLT (less than 0)
+//if it's 1 (meaning the key is pressed, then go to the next)
+//(screenLoop) to go through all the pixels
