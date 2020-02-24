@@ -22,7 +22,7 @@
 (BEGIN)
 @SCREEN
 D = A //pulls the address register since the screen is a whole register by itself
-@pixel //pixel variable
+@pixel //individual pixel variable
 M = D
 
 (LOOP)
@@ -52,7 +52,7 @@ M = 0 //white
 D = M + 1 //increment pixel
 M = D
 @KBD
-D = A - D
+D = A - D //cycle through next keyboard bit
 @BEGIN
 D; JEQ
 @LOOP
