@@ -19,6 +19,7 @@
 //(screenLoop) to go through all the pixels
 //sCounter for the 
 
+(BEGIN)
 @SCREEN
 D = A //pulls the address register since the screen is a whole register by itself
 @pixel //pixel variable
@@ -28,21 +29,31 @@ M = D
 @KBD //keyboard
 D = M
 @WHITEOUT
-M; JEQ //if m is = 0
+D; JEQ //if m is = 0
 @BLACKOUT
-M; JGT //m = 1
+D; JGT //m = 1
 
 //black out
 (BLACKOUT)
 @pixel
 M = 1 //black
+@NEXTLINE
+0;JMP //always jump
 
 //white out
 (WHITEOUT)
 @pixel
-M = 0
+M = 0 //white
+@NEXTLINE
+0;JMP
 
-
-
+(NEXTLINE)
+@pixel
+D = M + 1 //increment pixel
+M = D
+@KBD
+D = A - D
+@BEGIN
+D; JEQ
 @LOOP
-D; //loop to the top
+0;JMP //loop to the top
