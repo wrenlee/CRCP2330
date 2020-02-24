@@ -36,7 +36,7 @@ D; JGT //m = 1
 //black out
 (BLACKOUT)
 @pixel
-M = 1 //black
+M = -1 //black
 @NEXTLINE
 0;JMP //always jump
 
