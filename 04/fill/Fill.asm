@@ -14,6 +14,17 @@
 // Put your code here.
 
 //@keyboard
-//(KEYLOOP) if the m is JLT (less than 0)
+//(KEYLOOP) if the m is equal to 0
 //if it's 1 (meaning the key is pressed, then go to the next)
 //(screenLoop) to go through all the pixels
+//sCounter for the 
+
+@KBD //keyboard
+(KLOOP)
+@KLOOP
+M; JEQ //if m is = 0
+
+//black out
+
+
+//white out
