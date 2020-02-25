@@ -13,14 +13,13 @@
 
 // Put your code here.
 
-//@keyboard
-//(KEYLOOP) if the m is equal to 0
-//if it's 1 (meaning the key is pressed, then go to the next)
-//(screenLoop) to go through all the pixels
-//sCounter
-
 
 (LOOP)
+@SCREEN //calls screen address
+D = A //sets the address of the screen of the 0,0 pixel
+@pixel
+M = D //sets first pixel
+
 @KBD //keyboard
 D = M //calls keyboard values
 
@@ -44,7 +43,7 @@ M = 0 //white
 0;JMP
 
 (DRAW)
-@8192 //number of pixels to be colored white or black (256 rows * 512 pixels per row) / 16
+@8192 //(256 rows * 512 pixels per row) / 16
 D = A //setting the address of 8191 to the data register
 @counter //create counter to the number of pixels to be changed by using register 1
 M = D //setting the data register to the memory register of counter variable
@@ -54,8 +53,6 @@ M = D //setting the data register to the memory register of counter variable
 D = M //calling the counter
 @position
 M = D //setting the counter's value to the position
-@SCREEN //calls screen address
-D = A //sets the address of the screen 
 @position
 M = M + D //adds the current position to the screen
 
@@ -69,7 +66,7 @@ M = D //sets the position to be the color the pixel
 M = M - 1 //decrease counter by one
 
 @CONTINUE
-M; JGE //if counter is greater than or equal to 0 so not all the pixels are filled
+M; JGE //if not all the pixels are filled
 
 @LOOP
 0;JMP //loop to the top
