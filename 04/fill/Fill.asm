@@ -15,11 +15,6 @@
 
 
 (LOOP)
-@SCREEN //calls screen address
-D = A //sets the address of the screen of the 0,0 pixel
-@pixel
-M = D //sets first pixel
-
 @KBD //keyboard
 D = M //calls keyboard values
 
@@ -51,6 +46,8 @@ M = D //setting the data register to the memory register of counter variable
 (CONTINUE)
 @counter
 D = M //calling the counter
+@SCREEN
+D = A 
 @position
 M = D //setting the counter's value to the position
 @position
