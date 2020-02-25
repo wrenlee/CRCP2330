@@ -25,9 +25,9 @@
 D = M //calls keyboard values
 
 @BLACKOUT
-D; JGT //if d = 1 aka key is pressed
+D; JNE //if d = 1 aka key is pressed
 @WHITEOUT
-D; JMP //else
+D; JEQ //else
 
 //black out
 (BLACKOUT)
@@ -44,32 +44,32 @@ M = 0 //white
 0;JMP
 
 (DRAW)
-@8191 //number of pixels to be colored white or black
+@8192 //number of pixels to be colored white or black (256 rows * 512 pixels per row) / 16
 D = A //setting the address of 8191 to the data register
-@R1 //create counter to the number of pixels to be changed
+@counter //create counter to the number of pixels to be changed by using register 1
 M = D //setting the data register to the memory register of counter variable
 
-(NEXT)
-@R1
+(CONTINUE)
+@counter
 D = M //calling the counter
 @position
 M = D //setting the counter's value to the position
 @SCREEN //calls screen address
 D = A //sets the address of the screen 
 @position
-M = M + D //adds the current position and the screen
+M = M + D //adds the current position to the screen
 
 @R0
 D = M //calls pixel with the black or white value
 @position
-A = M 
+//A = M 
 M = D //sets the position to be the color the pixel
 
-@R1
+@counter //counter
 M = M - 1 //decrease counter by one
 
-@NEXT
-M; JGE //if counter is greater than or equal to 0
+@CONTINUE
+M; JGE //if counter is greater than or equal to 0 so not all the pixels are filled
 
 @LOOP
 0;JMP //loop to the top
