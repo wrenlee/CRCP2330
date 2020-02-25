@@ -17,27 +17,28 @@
 //(KEYLOOP) if the m is equal to 0
 //if it's 1 (meaning the key is pressed, then go to the next)
 //(screenLoop) to go through all the pixels
-//sCounter for the 
+//sCounter
 
 
 (LOOP)
 @KBD //keyboard
 D = M //calls keyboard values
-@WHITEOUT
-D; JEQ //if m is = 0
+
 @BLACKOUT
-D; JGT //m = 1
+D; JGT //if d = 1 aka key is pressed
+@WHITEOUT
+D; JMP //else
 
 //black out
 (BLACKOUT)
-@pixel
+@R0
 M = -1 //black
 @DRAW
 0;JMP //always jump
 
 //white out
 (WHITEOUT)
-@pixel
+@R0
 M = 0 //white
 @DRAW
 0;JMP
@@ -45,11 +46,11 @@ M = 0 //white
 (DRAW)
 @8191 //number of pixels to be colored white or black
 D = A //setting the address of 8191 to the data register
-@counter //create counter to the number of pixels to be changed
+@R1 //create counter to the number of pixels to be changed
 M = D //setting the data register to the memory register of counter variable
 
 (NEXT)
-@counter
+@R1
 D = M //calling the counter
 @position
 M = D //setting the counter's value to the position
@@ -58,13 +59,13 @@ D = A //sets the address of the screen
 @position
 M = M + D //adds the current position and the screen
 
-@pixel
+@R0
 D = M //calls pixel with the black or white value
 @position
 A = M 
 M = D //sets the position to be the color the pixel
 
-@counter
+@R1
 M = M - 1 //decrease counter by one
 
 @NEXT
