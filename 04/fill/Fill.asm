@@ -39,7 +39,7 @@ M = 0 //white
 
 (DRAW)
 @8192 //(256 rows * 512 pixels per row) / 16
-D = A //setting the address of 8191 to the data register
+D = M //setting the address of 8191 to the data register
 @counter //create counter to the number of pixels to be changed by using register 1
 M = D //setting the data register to the memory register of counter variable
 
