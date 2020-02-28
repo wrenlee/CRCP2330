@@ -20,6 +20,11 @@
 @KBD //keyboard
 D = A //calls keyboard values from keyboard address
 
+@SCREEN //screen address as an address 16384 , creates scr variable that holds the 16 bit word
+D = M 
+@scr //screen variable
+M = D  //sets screen address to screen variable
+
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
 @WHITEOUT
@@ -28,7 +33,7 @@ D; JEQ //if d = 0 aka no key is pressed
 //black out
 (BLACKOUT)
 @pixel
-M = 1 //black
+M = -1 //black all 1s in binary = -1
 @DRAW
 0;JMP //always jump
 
@@ -48,12 +53,9 @@ M = D //setting the data register to the memory register of counter variable
 (CONTINUE)
 @pixel
 D = M //calls pixel with the black or white value
-@position
-M = D //sets the position to be the color the pixel
-@SCREEN
-D = A //calls screen address
-D = M //sets colored position pixel
-A = D //resets pixel into the screen
+@scr
+M = D //resets pixel value into the screen
+A = A + 1 //advances scr to the next 16 bit word
 
 @counter //counter
 M = M - 1 //decrease counter by one
