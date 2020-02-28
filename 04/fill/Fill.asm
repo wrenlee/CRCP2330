@@ -13,6 +13,8 @@
 
 // Put your code here.
 
+//a register for register itself
+//m for the word contained IN the register
 
 (LOOP)
 @KBD //keyboard
@@ -21,12 +23,12 @@ D = A //calls keyboard values from keyboard address
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
 @WHITEOUT
-D; JEQ //else
+D; JEQ //if d = 0 aka no key is pressed
 
 //black out
 (BLACKOUT)
 @pixel
-M = -1 //black
+M = 1 //black
 @DRAW
 0;JMP //always jump
 
@@ -44,17 +46,20 @@ D = A //setting the address of 8191 to the data register
 M = D //setting the data register to the memory register of counter variable
 
 (CONTINUE)
-@counter
-D = M //calling the counter
+//@counter
+//D = M
 @SCREEN
 D = A //set screen address to data register
 @position
 M = D //sets screen to position variable
+M = M + 1
 
 @pixel
 D = M //calls pixel with the black or white value
 @position
 M = D //sets the position to be the color the pixel
+//@SCREEN
+//D = M //resets pixel into the 
 
 @counter //counter
 M = M - 1 //decrease counter by one
