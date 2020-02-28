@@ -53,7 +53,7 @@ M = D //sets the position to be the color the pixel
 @SCREEN
 D = A //calls screen address
 D = M //sets colored position pixel
-M = D //resets pixel into the screen
+A = D //resets pixel into the screen
 
 @counter //counter
 M = M - 1 //decrease counter by one
