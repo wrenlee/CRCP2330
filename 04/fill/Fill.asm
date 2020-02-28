@@ -46,20 +46,14 @@ D = A //setting the address of 8191 to the data register
 M = D //setting the data register to the memory register of counter variable
 
 (CONTINUE)
-//@counter
-//D = M
 @SCREEN
-D = A //set screen address to data register
-@position
-M = D //sets screen to position variable
-M = M + 1
-
+D = A //calls screen address
 @pixel
 D = M //calls pixel with the black or white value
 @position
 M = D //sets the position to be the color the pixel
-//@SCREEN
-//D = M //resets pixel into the 
+@SCREEN
+D = M //resets pixel into the screen
 
 @counter //counter
 M = M - 1 //decrease counter by one
