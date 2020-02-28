@@ -46,20 +46,20 @@ D = A //setting the address of 8191 to the data register
 M = D //setting the data register to the memory register of counter variable
 
 (CONTINUE)
-@SCREEN
-D = A //calls screen address
 @pixel
 D = M //calls pixel with the black or white value
 @position
 M = D //sets the position to be the color the pixel
 @SCREEN
-D = M //resets pixel into the screen
+D = A //calls screen address
+D = M //sets colored position pixel
+M = D //resets pixel into the screen
 
 @counter //counter
 M = M - 1 //decrease counter by one
 
 @CONTINUE
-M; JGE //if not all the pixels are filled
+M; JGT //if not all the pixels are filled
 
 @LOOP
 0;JMP //loop to the top to always check keyboard
