@@ -16,7 +16,7 @@
 
 (LOOP)
 @KBD //keyboard
-D = M //calls keyboard values from keyboard address
+D = A //calls keyboard values from keyboard address
 
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
@@ -49,14 +49,11 @@ D = M //calling the counter
 @SCREEN
 D = A //set screen address to data register
 @position
-M = D //setting the counter's value to the position
-@position
-M = M + D //adds the current position to the screen
+M = D //sets screen to position variable
 
 @pixel
 D = M //calls pixel with the black or white value
 @position
-//A = M 
 M = D //sets the position to be the color the pixel
 
 @counter //counter
