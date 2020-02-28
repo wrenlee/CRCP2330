@@ -16,7 +16,7 @@
 
 (LOOP)
 @KBD //keyboard
-D = M //calls keyboard values
+D = M //calls keyboard values from keyboard address
 
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
@@ -25,35 +25,35 @@ D; JEQ //else
 
 //black out
 (BLACKOUT)
-@R0
+@pixel
 M = -1 //black
 @DRAW
 0;JMP //always jump
 
 //white out
 (WHITEOUT)
-@R0
+@pixel
 M = 0 //white
 @DRAW
-0;JMP
+0;JMP //always jump
 
 (DRAW)
-@8192 //(256 rows * 512 pixels per row) / 16
-D = M //setting the address of 8191 to the data register
-@counter //create counter to the number of pixels to be changed by using register 1
+@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
+D = A //setting the address of 8191 to the data register
+@counter //create counter to the number of pixels to be changed
 M = D //setting the data register to the memory register of counter variable
 
 (CONTINUE)
 @counter
 D = M //calling the counter
 @SCREEN
-D = A 
+D = A //set screen address to data register
 @position
 M = D //setting the counter's value to the position
 @position
 M = M + D //adds the current position to the screen
 
-@R0
+@pixel
 D = M //calls pixel with the black or white value
 @position
 //A = M 
@@ -66,4 +66,4 @@ M = M - 1 //decrease counter by one
 M; JGE //if not all the pixels are filled
 
 @LOOP
-0;JMP //loop to the top
+0;JMP //loop to the top to always check keyboard
