@@ -25,6 +25,11 @@ D = M
 @scr //screen variable
 M = D  //sets screen address to screen variable
 
+@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
+D = A //setting the address of 8191 to the data register
+@counter //create counter to the number of pixels to be changed
+M = D //setting the data register to the memory register of counter variable
+
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
 @WHITEOUT
@@ -45,11 +50,6 @@ M = 0 //white
 0;JMP //always jump
 
 (DRAW)
-@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
-D = A //setting the address of 8191 to the data register
-@counter //create counter to the number of pixels to be changed
-M = D //setting the data register to the memory register of counter variable
-
 (CONTINUE)
 @pixel
 D = M //calls pixel with the black or white value
