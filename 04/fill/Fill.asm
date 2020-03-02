@@ -40,16 +40,6 @@ D; JEQ //if d = 0 aka no key is pressed
 (BLACKOUT)
 @pixel
 M = -1 //black all 1s in binary = -1
-@DRAW
-0;JMP //always jump
-
-//white out
-(WHITEOUT)
-@pixel
-M = 0 //white
-@DRAW
-0;JMP //always jump
-
 (DRAW)
 @pixel
 D = M //calls pixel with the black or white value
@@ -57,12 +47,46 @@ D = M //calls pixel with the black or white value
 M = D //resets pixel value into the screen
 @scr
 A = A + 1 //advances scr to the next 16 bit word
-
 @counter //counter
 M = M - 1 //decrease counter by one
-
 @DRAW
 M; JGT //if not all the pixels are filled
-
 @LOOP
 0;JMP //loop to the top to always check keyboard
+//@DRAW
+//0;JMP //always jump
+
+//white out
+(WHITEOUT)
+@pixel
+M = 0 //white
+(DRAW)
+@pixel
+D = M //calls pixel with the black or white value
+@scr
+M = D //resets pixel value into the screen
+@scr
+A = A + 1 //advances scr to the next 16 bit word
+@counter //counter
+M = M - 1 //decrease counter by one
+@DRAW
+M; JGT //if not all the pixels are filled
+@LOOP
+0;JMP //loop to the top to always check keyboard
+//@DRAW
+//0;JMP //always jump
+
+//(DRAW)
+//@pixel
+//D = M //calls pixel with the black or white value
+//@scr
+//M = D //resets pixel value into the screen
+//@scr
+//A = A + 1 //advances scr to the next 16 bit word
+//@counter //counter
+//M = M - 1 //decrease counter by one
+//@DRAW
+//M; JGT //if not all the pixels are filled
+
+//@LOOP
+//0;JMP //loop to the top to always check keyboard
