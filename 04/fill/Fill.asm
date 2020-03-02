@@ -20,8 +20,8 @@
 @KBD //keyboard
 D = A //calls keyboard values from keyboard address
 
-@SCREEN //screen address as an address 16384 , creates scr variable that holds the 16 bit word
-D = M 
+@SCREEN //screen address as an address 16384, creates scr variable that holds the 16 bit word
+D = A 
 @scr //screen variable
 M = D  //sets screen address to screen variable
 
