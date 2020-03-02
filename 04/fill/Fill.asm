@@ -17,13 +17,14 @@
 //m for the word contained IN the register
 
 (LOOP)
-//variables: screen counter, counter for number of 16 bit words
-@SCREEN //screen address as an address 16384, creates scr variable that holds the 16 bit word
+//variables: scr (screen counter), counter (number of 16 bit words in screen)
+@SCREEN //address 16384, creates scr variable that holds the 16 bit word
 D = A 
 @scr //screen counter variable
 M = D  //sets screen address to screen variable
+
 @8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
-D = A //setting the address of 8191 to the data register
+D = A //setting the address of 8192 to the data register
 @counter //create counter to the number of pixels to be changed
 M = D //setting the data register to the memory register of counter variable
 
@@ -50,17 +51,17 @@ M = 0 //white
 0;JMP //always jump
 
 (DRAW)
-(CONTINUE)
 @pixel
 D = M //calls pixel with the black or white value
 @scr
 M = D //resets pixel value into the screen
+@scr
 A = A + 1 //advances scr to the next 16 bit word
 
 @counter //counter
 M = M - 1 //decrease counter by one
 
-@CONTINUE
+@DRAW
 M; JGT //if not all the pixels are filled
 
 @LOOP
