@@ -17,18 +17,18 @@
 //m for the word contained IN the register
 
 (LOOP)
-@KBD //keyboard
-D = A //calls keyboard values from keyboard address
-
+//variables: screen counter, counter for number of 16 bit words
 @SCREEN //screen address as an address 16384, creates scr variable that holds the 16 bit word
 D = A 
-@scr //screen variable
+@scr //screen counter variable
 M = D  //sets screen address to screen variable
-
 @8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
 D = A //setting the address of 8191 to the data register
 @counter //create counter to the number of pixels to be changed
 M = D //setting the data register to the memory register of counter variable
+
+@KBD //keyboard
+D = M //calls keyboard values from keyboard address
 
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
