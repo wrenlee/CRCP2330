@@ -30,7 +30,6 @@ M = D //setting the data register to the memory register of counter variable
 
 @KBD //keyboard
 D = M //calls keyboard values from keyboard address
-
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
 @WHITEOUT
@@ -47,9 +46,10 @@ D = M //calls pixel with the black or white value
 M = D //resets pixel value into the screen
 @scr
 A = A + 1 //advances scr to the next 16 bit word
+M = A
 @counter //counter
 M = M - 1 //decrease counter by one
-@BLACKOUT
+@DRAW
 M; JGT //if not all the pixels are filled
 @LOOP
 0;JMP //loop to the top to always check keyboard
@@ -69,7 +69,7 @@ M = D //resets pixel value into the screen
 A = A + 1 //advances scr to the next 16 bit word
 @counter //counter
 M = M - 1 //decrease counter by one
-@WHITEOUT
+@DRAW
 M; JGT //if not all the pixels are filled
 @LOOP
 0;JMP //loop to the top to always check keyboard
