@@ -49,7 +49,7 @@ M = D //resets pixel value into the screen
 A = A + 1 //advances scr to the next 16 bit word
 @counter //counter
 M = M - 1 //decrease counter by one
-@DRAW
+@BLACKOUT
 M; JGT //if not all the pixels are filled
 @LOOP
 0;JMP //loop to the top to always check keyboard
@@ -69,7 +69,7 @@ M = D //resets pixel value into the screen
 A = A + 1 //advances scr to the next 16 bit word
 @counter //counter
 M = M - 1 //decrease counter by one
-@DRAW
+@WHITEOUT
 M; JGT //if not all the pixels are filled
 @LOOP
 0;JMP //loop to the top to always check keyboard
