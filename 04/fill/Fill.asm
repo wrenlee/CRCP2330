@@ -60,6 +60,6 @@ M = 0
 @16
 M = M - 1 
 @DRAW
-M; JNE
+M; JGE
 @LOOP
 0; JMP
