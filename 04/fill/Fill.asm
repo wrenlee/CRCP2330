@@ -18,6 +18,11 @@
 
 (LOOP)
 (TLOOP)
+@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
+D = A
+@counter
+M = D
+
 @KBD //keyboard
 D = M //calls keyboard values from keyboard address
 @BLACKOUT
@@ -27,19 +32,16 @@ D; JEQ //if d = 0 aka no key is pressed
 @TLOOP
 0; JMP //loops to the top and checks again
 
-//fills in from the last register to the first one as the counter counts down
-
 //black out
 (BLACKOUT)
 (DRAW)
-@pixel
-M = -1 //black all 1s in binary = -1
-@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
-D = A //setting the address of 8192 to the data register
-@SCREEN //address 16384, creates scr variable that holds the 16 bit word
-A = A + D //advances the register from the first screen 16384 to whatever the counter is
-M = M //puts the -1 register values into the screen
-@counter //counter
+@counter
+D = M //pulls counter
+@SCREEN //address 16384
+D = D + A //counter + 16384
+A = D //puts d register into the a register
+M = -1 //puts -1 into register (-1 is all 1s)
+@counter
 M = M - 1 //decrease counter by one
 @DRAW
 M; JGT //if not all the pixels are filled
@@ -49,16 +51,15 @@ M; JGT //if not all the pixels are filled
 //white out
 (WHITEOUT)
 (DRAW)
-@pixel
-M = 0 //white
-@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
-D = A //setting the address of 8192 to the data register
-@SCREEN //address 16384, creates scr variable that holds the 16 bit word
-A = A + D //advances the register from the first screen 16384 to whatever the counter is
-M = M //puts the -1 register values into the screen
-@counter //counter
-M = M - 1 //decrease counter by one
+@counter
+D = M
+@SCREEN
+D = D + A 
+A = D 
+M = 0
+@counter
+M = M - 1 
 @DRAW
-M; JGT //if not all the pixels are filled
+M; JGT 
 @LOOP
-0; JMP //loop to the top to always check keyboard
+0; JMP
