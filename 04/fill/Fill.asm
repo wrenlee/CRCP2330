@@ -18,7 +18,7 @@
 
 (LOOP)
 (TLOOP)
-@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels
+@8191 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels minus one because 16384 + 8191 is the same as keyboard register
 D = A
 @16
 M = D
@@ -60,6 +60,6 @@ M = 0
 @16
 M = M - 1 
 @DRAW
-M; JGT 
+M; JNE
 @LOOP
 0; JMP
