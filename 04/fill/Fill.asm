@@ -18,7 +18,7 @@
 
 (LOOP)
 (TLOOP)
-@8192 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels minus one because 16384 + 8191 is the same as keyboard register
+@8191 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels minus one because 16384 + 8191 is the same as keyboard register
 D = A
 @R1 //counter
 M = D
@@ -44,7 +44,7 @@ M = -1 //puts -1 into register (-1 is all 1s)
 @R1
 M = M - 1 //decrease counter by one
 @DRAW
-M; JGT //if not all the pixels are filled
+M; JGW //if not all the pixels are filled
 @LOOP
 0; JMP //loop to the top to always check keyboard
 
@@ -60,6 +60,6 @@ M = 0
 @R1
 M = M - 1 
 @DRAW
-M; JGT
+M; JGE
 @LOOP
 0; JMP
