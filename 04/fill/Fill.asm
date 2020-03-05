@@ -20,7 +20,7 @@
 (TLOOP)
 @8191 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels minus one because 16384 + 8191 is the same as keyboard register
 D = A
-@16
+@R1 //counter
 M = D
 
 @KBD //keyboard
@@ -35,13 +35,13 @@ D; JEQ //if d = 0 aka no key is pressed
 //black out
 (BLACKOUT)
 (DRAW)
-@16
+@R1
 D = M //pulls counter
 @SCREEN //address 16384
 D = D + A //counter + 16384
 A = D //puts d register into the a register
 M = -1 //puts -1 into register (-1 is all 1s)
-@16
+@R1
 M = M - 1 //decrease counter by one
 @DRAW
 M; JGT //if not all the pixels are filled
@@ -51,13 +51,13 @@ M; JGT //if not all the pixels are filled
 //white out
 (WHITEOUT)
 (DRAW)
-@16
+@R1
 D = M
 @SCREEN
 D = D + A 
 A = D 
 M = 0
-@16
+@R1
 M = M - 1 
 @DRAW
 M; JGE
