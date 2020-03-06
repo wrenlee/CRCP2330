@@ -19,13 +19,14 @@
 (LOOP)
 @8191 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels minus one because 16384 + 8191 is the same as keyboard register
 D = A
-@R1 //counter
+@R0 //counter
 M = D
 
 @KBD //keyboard
 D = M //calls keyboard values from keyboard address
 @BLACKOUT
 D; JNE //if d = 1 aka key is pressed
+//@BLACKOUT
 @WHITEOUT
 D; JEQ //if d = 0 aka no key is pressed
 @LOOP
@@ -33,32 +34,34 @@ D; JEQ //if d = 0 aka no key is pressed
 
 //black out
 (BLACKOUT)
-(DRAW)
-@R1
+(DRAWA)
+@R0
 D = M //pulls counter
 @SCREEN //address 16384
-D = D + A //counter + 16384
-//A = D //puts d register into the a register
+D = A + D //counter + 16384
+@scr
+A = D //sets the addition to the address of scr
 M = -1 //puts -1 into register (-1 is all 1s)
-@R1
+@R0
 M = M - 1 //decrease counter by one
-@DRAW
-M; JGW //if not all the pixels are filled
+@DRAWA
+M; JGE //if not all the pixels are filled
 @LOOP
 0; JMP //loop to the top to always check keyboard
 
 //white out
 (WHITEOUT)
-(DRAW)
-@R1
+(DRAWB)
+@R0
 D = M
 @SCREEN
 D = D + A 
-//A = D 
+@scr
+A = D
 M = 0
-@R1
+@R0
 M = M - 1 
-@DRAW
+@DRAWB
 M; JGE
 @LOOP
 0; JMP
