@@ -17,7 +17,6 @@
 //m for the word contained IN the register
 
 (LOOP)
-(TLOOP)
 @8191 //(256 rows * 512 pixels per row) / 16 = number of 16 bit pixels minus one because 16384 + 8191 is the same as keyboard register
 D = A
 @R1 //counter
@@ -29,7 +28,7 @@ D = M //calls keyboard values from keyboard address
 D; JNE //if d = 1 aka key is pressed
 @WHITEOUT
 D; JEQ //if d = 0 aka no key is pressed
-@TLOOP
+@LOOP
 0; JMP //loops to the top and checks again
 
 //black out
