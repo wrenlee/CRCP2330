@@ -29,8 +29,8 @@ D; JNE //if d = 1 aka key is pressed
 //@BLACKOUT
 @WHITEOUT
 D; JEQ //if d = 0 aka no key is pressed
-@LOOP
-0; JMP //loops to the top and checks again
+//@LOOP
+//0; JMP //loops to the top and checks again
 
 //black out
 (BLACKOUT)
@@ -38,12 +38,11 @@ D; JEQ //if d = 0 aka no key is pressed
 @R0
 D = M //pulls counter
 @SCREEN //address 16384
-D = A + D //counter + 16384
-@scr
-A = D //sets the addition to the address of scr
+D = D + A //counter + 16384
+A = D //sets the addition to the address
 M = -1 //puts -1 into register (-1 is all 1s)
 @R0
-M = M + 1 //decrease counter by one
+M = M - 1 //decrease counter by one
 @DRAWA
 M; JGE //if not all the pixels are filled
 @LOOP
@@ -56,11 +55,10 @@ M; JGE //if not all the pixels are filled
 D = M
 @SCREEN
 D = D + A 
-@scr
 A = D
 M = 0
 @R0
-M = M + 1 
+M = M - 1 
 @DRAWB
 M; JGE
 @LOOP
