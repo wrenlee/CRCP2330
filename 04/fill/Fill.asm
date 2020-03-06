@@ -43,8 +43,9 @@ A = D //sets the addition to the address
 M = -1 //puts -1 into register (-1 is all 1s)
 @R0
 M = M - 1 //decrease counter by one
+D = M
 @DRAWA
-M; JGE //if not all the pixels are filled
+D; JGE //if not all the pixels are filled
 @LOOP
 0; JMP //loop to the top to always check keyboard
 
@@ -58,8 +59,9 @@ D = D + A
 A = D
 M = 0
 @R0
-M = M - 1 
+M = M - 1
+D = M
 @DRAWB
-M; JGE
+D; JGE
 @LOOP
 0; JMP
