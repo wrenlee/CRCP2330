@@ -43,7 +43,7 @@ D = A + D //counter + 16384
 A = D //sets the addition to the address of scr
 M = -1 //puts -1 into register (-1 is all 1s)
 @R0
-M = M - 1 //decrease counter by one
+M = M + 1 //decrease counter by one
 @DRAWA
 M; JGE //if not all the pixels are filled
 @LOOP
@@ -60,7 +60,7 @@ D = D + A
 A = D
 M = 0
 @R0
-M = M - 1 
+M = M + 1 
 @DRAWB
 M; JGE
 @LOOP
