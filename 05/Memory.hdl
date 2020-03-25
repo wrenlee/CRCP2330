@@ -28,5 +28,23 @@ CHIP Memory {
 
     PARTS:
     // Put your code here:
-    DMux4Way(in=load, sel=, );
+
+    //0-15 = 16 bits
+
+    //MSD is always a 0 in the a-instruction
+
+    //0 read, 1 write
+    //14, 13
+    //0 0 -> ram16 start
+    //0 1 -> ram16 end
+    //1 0 -> screen start
+    //1 1 -> keyboard
+
+    DMux4Way(in=load, sel=address[13..14], a=load1, b=load2, c=load3, d=load4); //what signal to send to send where
+    //built in part to load or write in memory chips
+    RAM16K(in=in, load=, address=, out=ram); // address 14
+    //screen implies that it's already 1 in the 14th bit place
+    Screen(in=in, load=load3, address=, out=screen); //address 13
+    Keyboard(out=keyboard);
+    Mux4Way(a=ram, b=ram, c=screen, d=keyboard, sel=, out=out); //outputs stored or new value
 }
