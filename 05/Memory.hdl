@@ -42,8 +42,9 @@ CHIP Memory {
 
     
 	DMux4Way(in=load, sel=address[13..14], a=load1, b=load2, c=load3, d=load4); //what signal to send to send where
+    Or(a=load1, b=load2, out=loadOr); //choose write or read of the 16K RAM
     //built in part to load or write in memory chips
-    RAM16K(in=in, load=load1, address=address[0..13], out=ram); // address 14
+    RAM16K(in=in, load=loadOr, address=address[0..13], out=ram); // address 14
     //screen implies that it's already 1 in the 14th bit place
     Screen(in=in, load=load3, address=address[0..12], out=screen); //address 13
     Keyboard(out=keyboard);
