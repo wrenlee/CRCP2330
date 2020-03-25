@@ -40,11 +40,21 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
+
     //instruction
+    Mux16(a=aluOut, b=, sel=, out=mux1); //alu output v instruction
+
+    Register(in=, load=, out=aReg, out=addressM); //a register
+
+    Mux16(a=, b=, sel=, out=mux2); //a register v data memory
 
     //inM
 
     //reset
-    
-    PC(in=areg, inc=, load=, reset=reset, out=pc);
+    //pc inc 1 = increments
+    Or(a=instruction[0], b=instruction[1], out=pcOr1);
+    Or(a=instruction[3], b=pcOr1, out=pcOr);
+    Not(in=pcOr, out=notPcOr);
+    //load a register or not, inputs from a register
+    PC(in=aReg, inc=notPcOr, load=instruction[15], reset=reset, out[14..0]=pc); //outputs 15 bits of next instruction
 }
