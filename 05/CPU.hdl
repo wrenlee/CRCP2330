@@ -42,11 +42,14 @@ CHIP CPU {
     // Put your code here:
 
     //instruction
-    Mux16(a=aluOut, b=, sel=, out=mux1); //alu output v instruction
+    //a instruction opcode 0 = instruction
+    Mux16(a=instruction, b=aluOut, sel=instruction[15], out=mux1); //alu output v instruction
 
-    Register(in=, load=, out=aReg, out=addressM); //a register
+    Register(in=mux1, load=instruction[12], out=aReg, out=addressM); //a register
 
     Mux16(a=, b=, sel=, out=mux2); //a register v data memory
+
+    Register(in=, load=, out=,); //d register
 
     //inM
 
