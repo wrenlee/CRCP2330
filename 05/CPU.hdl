@@ -41,23 +41,21 @@ CHIP CPU {
     PARTS:
     // Put your code here:
 
-    //instruction
     //a instruction opcode 0 = instruction
     Mux16(a=instruction, b=aluOut, sel=instruction[15], out=mux1); //alu output v instruction
-
     Register(in=mux1, load=instruction[12], out=aReg, out=addressM); //a register
+    Mux16(a=aReg, b=inM, sel=instruction[12], out=mux2); //a register v data memory
+    Register(in=aluOut, load=, out=dReg); //d register
+    ALU(x=dReg, y=mux2, zx=address[11], nx=address[10], zy=address[9], ny=address[8], f=address[7], no=address[6], out=outM, out=aluOut, zr=, ng=);
 
-    Mux16(a=, b=, sel=, out=mux2); //a register v data memory
-
-    Register(in=, load=, out=,); //d register
-
-    //inM
-
-    //reset
     //pc inc 1 = increments
     Or(a=instruction[0], b=instruction[1], out=pcOr1);
     Or(a=instruction[3], b=pcOr1, out=pcOr);
     Not(in=pcOr, out=notPcOr);
     //load a register or not, inputs from a register
     PC(in=aReg, inc=notPcOr, load=instruction[15], reset=reset, out[14..0]=pc); //outputs 15 bits of next instruction
+
+    //writeM
+    Or(a=instruction[5], b=instruction[4], out=write1);
+    Or(a=write1, b=instruction[3], out=writeM);
 }
