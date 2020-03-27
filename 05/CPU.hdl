@@ -50,18 +50,18 @@ CHIP CPU {
 
     And(a=cInstruction, b=instruction[5], out=aluOrIn); //instruction 5/d1 a, 1 = use a register
     Mux16(a=instruction, b=aluOut, sel=aluOrIn, out=muxA); //alu output v instruction
-    Or(a=aluOrIn, b=aInstruction, out=aLoad); //load a register or not
+    Or(a=aluOrIn, b=aInstruction, out=aLoad); //load a register or not, a instruction or c instruction w/ a register
     ARegister(in=muxA, load=aLoad, out=aReg); //a register
 
-    Mux16(a=aReg, b=inM, sel=instruction[12], out=mux2); //a register v m memory
+    Mux16(a=aReg, b=inM, sel=instruction[12], out=muxAM); //a register v m memory
 
     And(a=instruction[4], b=cInstruction, out=dLoad);//instruction 4/d2 = d, 1 = use d register
     DRegister(in=aluOut, load=dLoad, out=dReg); //d register
 
-    ALU(x=dReg, y=mux2, zx=address[11], nx=address[10], zy=address[9], ny=address[8], f=address[7], no=address[6], out=outM, out=aluOut, zr=aluZr, ng=aluNg);
+    ALU(x=dReg, y=muxAM, zx=address[11], nx=address[10], zy=address[9], ny=address[8], f=address[7], no=address[6], out=outM, out=aluOut, zr=aluZr, ng=aluNg);
 
     //jumps
-
+    
 
     //pc inc 1 = increments
     Or(a=instruction[0], b=instruction[1], out=pcOr1);
