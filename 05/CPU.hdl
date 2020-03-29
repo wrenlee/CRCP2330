@@ -63,11 +63,20 @@ CHIP CPU {
     ALU(x=dReg, y=muxAM, zx=address[11], nx=address[10], zy=address[9], ny=address[8], f=address[7], no=address[6], out=aluOut, out=outM, zr=aluZr, ng=aluNg);
 
     //jumps
+    Or(a=aluZr, b=aluNg, out=zeroOrNeg); //if 1 = then it's negative or zero
+    Not(in=zeroOrNeg, out=pos);
+    And(a=pos, b=instruction[0], out=positive); //if output is positive and jump when positive
+
+    And(a=aluZr, b=instruction[1], out=equalZero); //output = 0 and jump when zero
+
+    And(a=aluNg, b=instruction[2], out=negative); //output is negative and jump when negative
+
+    Or(a=positive, b=equalZero, out=positiveOrZero);
+    Or(a=postiveOrZero, b=negative, out=jump);
+    And(a=cInstruction, b=jump, out=pcLoad); //jump AND c-instruction (a instructions don't have jumps)
+    Not(in=pcLoad, out=pcInc); //increment if all else fails
 
     //pc inc 1 = increments
-    Or(a=instruction[0], b=instruction[1], out=pcOr1);
-    Or(a=instruction[3], b=pcOr1, out=pcOr);
-    Not(in=pcOr, out=notPcOr);
     //load a register or not, inputs from a register
-    PC(in=aReg, inc=notPcOr, load=instruction[15], reset=reset, out[0..14]=pc); //outputs 15 bits of next instruction
+    PC(in=aReg, inc=pcInc, load=pcLoad, reset=reset, out[0..14]=pc); //outputs 15 bits of next instruction
 }
