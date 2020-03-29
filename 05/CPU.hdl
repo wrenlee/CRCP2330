@@ -60,7 +60,7 @@ CHIP CPU {
     And(a=instruction[4], b=cInstruction, out=dLoad);//instruction 4/d2 = d, 1 = use d register
     DRegister(in=aluOut, load=dLoad, out=dReg); //d register
 
-    ALU(x=dReg, y=muxAM, zx=address[11], nx=address[10], zy=address[9], ny=address[8], f=address[7], no=address[6], out=aluOut, out=outM, zr=aluZr, ng=aluNg);
+    ALU(x=dReg, y=muxAM, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=aluOut, out=outM, zr=aluZr, ng=aluNg);
 
     //jumps
     Or(a=aluZr, b=aluNg, out=zeroOrNeg); //if 1 = then it's negative or zero
@@ -78,5 +78,5 @@ CHIP CPU {
 
     //pc inc 1 = increments
     //load a register or not, inputs from a register
-    PC(in=aReg, inc=pcInc, load=pcLoad, reset=reset, out[0..14]=pc); //outputs 15 bits of next instruction
+    PC(in=aReg, inc=pcInc, load=pcLoad, reset=reset, out[0..14]=pc, out=pcOut); //outputs 15 bits of next instruction
 }
