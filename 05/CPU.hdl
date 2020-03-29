@@ -72,7 +72,7 @@ CHIP CPU {
     And(a=aluNg, b=instruction[2], out=negative); //output is negative and jump when negative
 
     Or(a=positive, b=equalZero, out=positiveOrZero);
-    Or(a=postiveOrZero, b=negative, out=jump);
+    Or(a=positiveOrZero, b=negative, out=jump);
     And(a=cInstruction, b=jump, out=pcLoad); //jump AND c-instruction (a instructions don't have jumps)
     Not(in=pcLoad, out=pcInc); //increment if all else fails
 
