@@ -1,0 +1,37 @@
+//particle class file
+
+class Particle{
+	field int x, y;
+	field int xSpeed, ySpeed;
+
+	constructor Particle new(int xPos, int yPos, int speed){
+		let x = xPos;
+		let y = yPos;
+		let xSpeed = speed;
+		let ySpeed = speed;
+		do draw();
+		return this;
+	}
+
+	method void draw(){
+		do Screen.setColor(true); //makes the pixel true
+		do Screen.drawCircle(x, y, 2); //draws circle with x and y position and 2 width
+		return;
+	}
+
+	method void move(){
+		let x = x + xSpeed;
+		let y = y + ySpeed;
+		do draw();
+		return;
+	}
+
+	method void decay(){
+		do Sys.wait(60000){//wait 60 seconds
+			do Screen.setColor(false);
+
+		}
+		return;
+
+	}
+}

@@ -2,7 +2,10 @@
 
 class Main {
     function void main() {
-        
+        field Particle p1;
+        let p1 = Particle.new(200, 200, 5);
+        do p1.draw();
+        do p1.move();
         return;
     }
 }
