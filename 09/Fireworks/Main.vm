@@ -1,0 +1,14 @@
+function Main.main 1
+push constant 200
+push constant 200
+push constant 5
+call Particle.new 3
+pop local 0
+push local 0
+call Particle.draw 1
+pop temp 0
+push local 0
+call Particle.move 1
+pop temp 0
+push constant 0
+return

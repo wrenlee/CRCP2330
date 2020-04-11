@@ -5,12 +5,12 @@ class Particle{
 	field int xSpeed, ySpeed;
 	field int decay;
 
-	constructor Particle new(int xPos, int yPos, int speed){
+	constructor Particle new(int xPos, int yPos, int speedX, int speedY){
 		let x = xPos;
 		let y = yPos;
-		let xSpeed = speed;
-		let ySpeed = speed;
-		let decay = 10;
+		let xSpeed = speedX;
+		let ySpeed = speedY;
+		let decay = 5;
 		do draw();
 		return this;
 	}
@@ -22,18 +22,12 @@ class Particle{
 	}
 
 	method void move(){
-		let x = x + xSpeed;
-		let y = y + ySpeed;
-		let decay = decay - 1;
-		do draw();
-		return;
-	}
-
-	method void decay(){
-		if(decay < 0){
-			do Screen.setColor(false);
+		while(decay > 0){
+			let x = x + xSpeed;
+			let y = y + ySpeed;
+			let decay = decay - 1;
+			do draw();
 		}
 		return;
-
 	}
 }
