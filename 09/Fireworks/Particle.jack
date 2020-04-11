@@ -3,12 +3,14 @@
 class Particle{
 	field int x, y;
 	field int xSpeed, ySpeed;
+	field int decay;
 
 	constructor Particle new(int xPos, int yPos, int speed){
 		let x = xPos;
 		let y = yPos;
 		let xSpeed = speed;
 		let ySpeed = speed;
+		let decay = 10;
 		do draw();
 		return this;
 	}
@@ -22,14 +24,14 @@ class Particle{
 	method void move(){
 		let x = x + xSpeed;
 		let y = y + ySpeed;
+		let decay = decay - 1;
 		do draw();
 		return;
 	}
 
 	method void decay(){
-		do Sys.wait(60000){//wait 60 seconds
+		if(decay < 0){
 			do Screen.setColor(false);
-
 		}
 		return;
 
