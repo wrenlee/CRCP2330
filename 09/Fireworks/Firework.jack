@@ -1,0 +1,49 @@
+class Firework{
+	field int x, y;
+	field Particle p1;
+	field Particle p2;
+	field Particle p3;
+	field Particle p4;
+	field Particle p5;
+	field Particle p6;
+	field Particle p7;
+	field Particle p8;
+
+	constructor Firework new(int x1, int y1){
+		let x = x1;
+		let y = y1;
+		let p1 = Particle.new(x, y, 5, 0);
+		let p2 = Particle.new(x, y, 5, -5);
+		let p3 = Particle.new(x, y, 0, -5);
+		let p4 = Particle.new(x, y, -5, -5);
+		let p5 = Particle.new(x, y, -5, 0);
+		let p6 = Particle.new(x, y, -5, 5);
+		let p7 = Particle.new(x, y, 0, 5);
+		let p8 = Particle.new(x, y, 5, 5);
+		return this;
+	}
+
+	method void display(){
+		do p1.draw();
+		do p2.draw();
+		do p3.draw();
+		do p4.draw();
+		do p5.draw();
+		do p6.draw();
+		do p7.draw();
+		do p8.draw();
+		return;
+	}
+
+	method void move(){
+		do p1.move();
+		do p2.move();
+		do p3.move();
+		do p4.move();
+		do p5.move();
+		do p6.move();
+		do p7.move();
+		do p8.move();
+		return;
+	}
+}

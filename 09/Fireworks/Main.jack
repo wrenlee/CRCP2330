@@ -2,11 +2,10 @@
 
 class Main {
     function void main() {
-        var Particle p1;
-
-        let p1 = Particle.new(200, 200, 5, -5);
-        do p1.draw();
-        do p1.move();
+        var Firework firework1;
+        let firework1 = new(100, 50);
+        do firework1.display();
+        do firework1.move();
         return;
     }
 }

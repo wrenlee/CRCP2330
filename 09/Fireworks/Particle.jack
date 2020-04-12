@@ -10,8 +10,8 @@ class Particle{
 		let y = yPos;
 		let xSpeed = speedX;
 		let ySpeed = speedY;
-		let decay = 5;
-		do draw();
+		let decay = 8;
+		//do draw();
 		return this;
 	}
 
@@ -22,10 +22,10 @@ class Particle{
 	}
 
 	method void move(){
-		while(decay > 0){
+		while(decay > 1){
 			let x = x + xSpeed;
 			let y = y + ySpeed;
-			let decay = decay - 1;
+			let decay = decay - 1; //continue decay
 			do draw();
 		}
 		return;
