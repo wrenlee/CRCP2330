@@ -1,0 +1,42 @@
+class Ball{
+	field int x, y;
+	field int xSpeed, ySpeed;
+
+	constructor Bell new(){
+		let x = 512/2;
+		let y = 256/2;
+		let xSpeed = 3; 
+		let ySpeed = 3; 
+		return this;
+	}
+
+	method void display(){
+		do Screen.setColor(true);
+		do Screen.drawCircle(x, y, 5);
+	}
+
+	method void move(){
+		do Screen.setColor(false); //makes the previous circile invisible
+		doScreen.drawCircle(x, y, 5);
+
+		let x = x + xSpeed;
+		let y = y + ySpeed;
+		do display();
+		return;
+	}
+
+	method void bounce(){
+		let x = x * -1;
+		let y = y * -1;
+		return;
+	}
+
+	method void reset(){
+		//draws circle at original position
+		let x = 512/2;
+		let y = 256/2;
+		do Screen.drawCircle(x, y, 5);
+		return;
+	}
+	
+}

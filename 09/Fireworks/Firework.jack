@@ -1,5 +1,7 @@
 class Firework{
 	field int x, y;
+	//creates all the particles
+	//each particle is one branch of 8 that goes in a combination of up/down/half up/down right/left/half right/half left
 	field Particle p1;
 	field Particle p2;
 	field Particle p3;
@@ -23,7 +25,7 @@ class Firework{
 		return this;
 	}
 
-	method void display(){
+	method void displayAll(){
 		do p1.draw();
 		do p2.draw();
 		do p3.draw();
@@ -35,7 +37,7 @@ class Firework{
 		return;
 	}
 
-	method void move(){
+	method void moveAll(){
 		do p1.move();
 		do p2.move();
 		do p3.move();

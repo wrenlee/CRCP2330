@@ -10,7 +10,7 @@ class Particle{
 		let y = yPos;
 		let xSpeed = speedX;
 		let ySpeed = speedY;
-		let decay = 8;
+		let decay = 5;
 		//do draw();
 		return this;
 	}

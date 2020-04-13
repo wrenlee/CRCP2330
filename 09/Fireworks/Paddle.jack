@@ -1,0 +1,30 @@
+class Paddle{
+	field int x, y;
+	field int width, height;
+
+	constructor Paddle new(){
+		let x = 50;
+		let y = 400; //x and y positions to begin with
+		let width = 30;
+		let height = 10;
+		return this;
+	}
+
+	method void display(){
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x, y, x+width, y+height); //draws rectangle
+		return;
+	}
+
+	method void move(){
+
+	}
+
+	method int getX(){
+		return x;
+	} 
+
+	method int getY(){
+		return y;
+	}
+}

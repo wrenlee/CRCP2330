@@ -2,10 +2,35 @@
 
 class Main {
     function void main() {
+    	//screen 512 col x 256 rows
+
         var Firework firework1;
-        let firework1 = new(100, 50);
-        do firework1.display();
-        do firework1.move();
+        var Firework firework2;
+        var Firework firework3;
+
+        var Ball ball1;
+
+        //fireworks functions
+        //init
+        let firework1 = Firework.new(50, 50);
+        let firework2 = Firework.new(200, 80);
+        let firework3 = Firework.new(300, 100);
+
+        //display
+        do firework1.displayAll();
+        do firework2.displayAll();
+        do firework3.displayAll();
+
+        //move
+        do firework1.moveAll();
+        do firework2.moveAll();
+        do firework3.moveAll();
+
+        //ball
+        let ball1 = Ball.new();
+        ball1.display(); //first display to draw at original position
+        ball1.move();
+
         return;
     }
 }
