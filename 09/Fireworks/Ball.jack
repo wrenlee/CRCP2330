@@ -23,7 +23,6 @@ class Ball{
 		let x = x + xSpeed;
 		let y = y + ySpeed;
 		do display();
-		do Output.printInt(x);
 		return;
 	}
 

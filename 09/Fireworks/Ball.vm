@@ -52,9 +52,6 @@ pop this 1
 push pointer 0
 call Ball.display 1
 pop temp 0
-push this 0
-call Output.printInt 1
-pop temp 0
 push constant 0
 return
 function Ball.bounce 0

@@ -9,6 +9,8 @@ class Main {
         var Firework firework3;
 
         var Ball ball1;
+        var int bx; //ball's x
+        var int by; //ball's y
 
         //fireworks functions
         //init
@@ -28,14 +30,17 @@ class Main {
 
         //ball
         let ball1 = Ball.new();
+        let bx = ball1.getX();
+        let by = ball1.getY();
         do ball1.display(); //first display to draw at original position
 
-        if ((ball1.getX()>0) && (ball1.getX()<512)){//if it's on the screen
+        while (~(bx>0 & bx<512 & by>0 & by<256)){//if it's on the screen
+        	do Output.printString("move");
         	do ball1.move();
         }
-        //else{
         //	do ball1.reset();
         //}
+
         //if the ball has hit the paddle, then bounce
         //if outside of the edges, 
 

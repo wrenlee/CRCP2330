@@ -1,12 +1,14 @@
 class Paddle{
 	field int x, y;
 	field int width, height;
+	field int xSpeed;
 
 	constructor Paddle new(){
 		let x = 50;
 		let y = 400; //x and y positions to begin with
 		let width = 30;
-		let height = 10;
+		let height = 20;
+		let xSpeed = 10;
 		return this;
 	}
 
@@ -17,6 +19,11 @@ class Paddle{
 	}
 
 	method void move(){
+		do Screen.setColor(false); //colors previous rectangle
+		do Screen.drawRectangle(x, y, x+width, y+height);
+
+		let x = x + xSpeed; //advances rectangle to move
+		do Screen.drawRectangle(x, y, x+width, y+height); //draw new rectangle
 		return;
 	}
 
