@@ -48,4 +48,17 @@ class Firework{
 		do p8.move();
 		return;
 	}
+
+	method void memory(){
+		do p1.memory();
+		do p2.memory();
+		do p3.memory();
+		do p4.memory();
+		do p5.memory();
+		do p6.memory();
+		do p7.memory();
+		do p8.memory();
+		do Memory.deAlloc(this);
+		return;
+	}
 }

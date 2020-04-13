@@ -5,8 +5,8 @@ class Ball{
 	constructor Ball new(){
 		let x = 512/2;
 		let y = 256/2;
-		let xSpeed = 5; 
-		let ySpeed = 5; 
+		let xSpeed = 10; 
+		let ySpeed = 10; 
 		return this;
 	}
 
@@ -46,6 +46,11 @@ class Ball{
 
 	method int getY(){
 		return y;
+	}
+
+	method void memory(){
+		do Memory.deAlloc(this);
+		return;
 	}
 	
 }

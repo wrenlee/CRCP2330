@@ -7,6 +7,8 @@ class Main {
         var Firework firework1;
         var Firework firework2;
         var Firework firework3;
+        var Firework firework4;
+        var Firework firework5;
 
         var Ball ball1;
         var int bx; //ball's x
@@ -17,16 +19,22 @@ class Main {
         let firework1 = Firework.new(50, 50);
         let firework2 = Firework.new(250, 80);
         let firework3 = Firework.new(470, 40);
+        let firework4 = Firework.new(100, 150);
+        let firework5 = Firework.new(370, 170);
 
         //display
         do firework1.displayAll();
         do firework2.displayAll();
         do firework3.displayAll();
+        do firework4.displayAll();
+        do firework5.displayAll();
 
         //move
         do firework1.moveAll();
         do firework2.moveAll();
         do firework3.moveAll();
+        do firework4.moveAll();
+        do firework5.moveAll();
 
         //ball
         let ball1 = Ball.new();
@@ -34,15 +42,19 @@ class Main {
         let by = ball1.getY();
         do ball1.display(); //first display to draw at original position
 
-        while (~(bx>0 & bx<512 & by>0 & by<256)){//if it's on the screen
-        	do Output.printString("move");
+        //while (~(bx>0 & bx<512 & by>0 & by<256)){//if it's on the screen
+        	//do Output.printString("move");
         	do ball1.move();
-        }
+        //}
         //	do ball1.reset();
         //}
 
-        //if the ball has hit the paddle, then bounce
-        //if outside of the edges, 
+
+        //memory management
+        do firework1.memory();
+        do firework2.memory();
+        do firework3.memory();
+        do ball1.memory();
 
         return;
     }

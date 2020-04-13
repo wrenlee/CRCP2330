@@ -30,4 +30,9 @@ class Particle{
 		}
 		return;
 	}
+
+	method void memory(){
+		do Memory.deAlloc(this);
+		return;
+	}
 }
