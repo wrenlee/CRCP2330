@@ -1,0 +1,102 @@
+function Ball.new 0
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push constant 512
+push constant 2
+call Math.divide 2
+pop this 0
+push constant 256
+push constant 2
+call Math.divide 2
+pop this 1
+push constant 5
+pop this 2
+push constant 5
+pop this 3
+push pointer 0
+return
+function Ball.display 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push constant 5
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Ball.move 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push constant 5
+call Screen.drawCircle 3
+pop temp 0
+push this 0
+push this 2
+add
+pop this 0
+push this 1
+push this 3
+add
+pop this 1
+push pointer 0
+call Ball.display 1
+pop temp 0
+push this 0
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function Ball.bounce 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+neg
+call Math.multiply 2
+pop this 0
+push this 1
+push constant 1
+neg
+call Math.multiply 2
+pop this 1
+push constant 0
+return
+function Ball.reset 0
+push argument 0
+pop pointer 0
+push constant 512
+push constant 2
+call Math.divide 2
+pop this 0
+push constant 256
+push constant 2
+call Math.divide 2
+pop this 1
+push this 0
+push this 1
+push constant 5
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Ball.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Ball.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return

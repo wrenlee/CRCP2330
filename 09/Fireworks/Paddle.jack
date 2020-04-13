@@ -17,7 +17,7 @@ class Paddle{
 	}
 
 	method void move(){
-
+		return;
 	}
 
 	method int getX(){

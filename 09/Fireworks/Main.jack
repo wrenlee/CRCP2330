@@ -13,8 +13,8 @@ class Main {
         //fireworks functions
         //init
         let firework1 = Firework.new(50, 50);
-        let firework2 = Firework.new(200, 80);
-        let firework3 = Firework.new(300, 100);
+        let firework2 = Firework.new(250, 80);
+        let firework3 = Firework.new(470, 40);
 
         //display
         do firework1.displayAll();
@@ -28,8 +28,16 @@ class Main {
 
         //ball
         let ball1 = Ball.new();
-        ball1.display(); //first display to draw at original position
-        ball1.move();
+        do ball1.display(); //first display to draw at original position
+
+        if ((ball1.getX()>0) && (ball1.getX()<512)){//if it's on the screen
+        	do ball1.move();
+        }
+        //else{
+        //	do ball1.reset();
+        //}
+        //if the ball has hit the paddle, then bounce
+        //if outside of the edges, 
 
         return;
     }

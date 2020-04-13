@@ -2,26 +2,28 @@ class Ball{
 	field int x, y;
 	field int xSpeed, ySpeed;
 
-	constructor Bell new(){
+	constructor Ball new(){
 		let x = 512/2;
 		let y = 256/2;
-		let xSpeed = 3; 
-		let ySpeed = 3; 
+		let xSpeed = 5; 
+		let ySpeed = 5; 
 		return this;
 	}
 
 	method void display(){
 		do Screen.setColor(true);
 		do Screen.drawCircle(x, y, 5);
+		return;
 	}
 
 	method void move(){
-		do Screen.setColor(false); //makes the previous circile invisible
-		doScreen.drawCircle(x, y, 5);
+		do Screen.setColor(false); //makes the previous circle invisible
+		do Screen.drawCircle(x, y, 5);
 
 		let x = x + xSpeed;
 		let y = y + ySpeed;
 		do display();
+		do Output.printInt(x);
 		return;
 	}
 
@@ -37,6 +39,14 @@ class Ball{
 		let y = 256/2;
 		do Screen.drawCircle(x, y, 5);
 		return;
+	}
+
+	method int getX(){
+		return x;
+	}
+
+	method int getY(){
+		return y;
 	}
 	
 }
