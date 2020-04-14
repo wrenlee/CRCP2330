@@ -1,0 +1,82 @@
+class Game{
+
+		field Firework firework1;
+        field Firework firework2;
+        field Firework firework3;
+        field Firework firework4;
+        field Firework firework5;
+
+        field Ball ball1;
+        field int bx; //ball's x
+        field int by; //ball's y
+
+	constructor Game new(){
+		//init
+        let firework1 = Firework.new(50, 50);
+        let firework2 = Firework.new(250, 80);
+        let firework3 = Firework.new(470, 40);
+        let firework4 = Firework.new(100, 150);
+        let firework5 = Firework.new(370, 170);
+        let ball1 = Ball.new();
+        let bx = ball1.getX();
+        let by = ball1.getY();
+        return this;
+	}
+
+	method void run(){
+		//screen 512 col x 256 rows
+		var boolean exit;
+		var char key;
+		let exit = false;
+
+		while(~exit){
+		//key pressed initialization
+		let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
+
+		//display
+        do firework1.displayAll();
+        do firework2.displayAll();
+        do firework3.displayAll();
+        do firework4.displayAll();
+        do firework5.displayAll();
+
+        //move
+        do firework1.moveAll();
+        do firework2.moveAll();
+        do firework3.moveAll();
+        do firework4.moveAll();
+        do firework5.moveAll();
+
+        //ball
+        do ball1.display(); //first display to draw at original position
+        do ball1.move();
+
+        if(bx<0 | bx>512 | by<0 | by>256){
+        	do System.printString("out of bounds");
+        	do ball1.reset();
+        }
+
+        //key presses
+        if (key = 69){ //if key is e
+        	let exit = true;
+        }//69 e
+		}//while exit is not true
+
+        //fix ball movement
+        //add in paddle, moves left and right
+        //add in block to bounce off of 
+        //if touch firework, reset
+        //press e to exit
+
+		return;
+	}//run
+
+	method void memory(){
+		//memory management
+        do firework1.memory();
+        do firework2.memory();
+        do firework3.memory();
+        do ball1.memory();
+		return;
+	}
+}
