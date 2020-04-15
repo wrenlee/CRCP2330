@@ -7,8 +7,6 @@ class Game{
         field Firework firework5;
 
         field Ball ball1;
-        field int bx; //ball's x
-        field int by; //ball's y
 
 	constructor Game new(){
 		//init
@@ -18,8 +16,6 @@ class Game{
         let firework4 = Firework.new(100, 150);
         let firework5 = Firework.new(370, 170);
         let ball1 = Ball.new();
-        let bx = ball1.getX();
-        let by = ball1.getY();
         return this;
 	}
 
@@ -50,7 +46,6 @@ class Game{
 	        //ball
 	        do ball1.display(); //first display to draw at original position
 	        do ball1.move();
-	        //do ball1.bounce();
 
 	        //key presses
 	        if (key = 69){ //if key is e
