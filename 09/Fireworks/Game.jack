@@ -30,36 +30,32 @@ class Game{
 		let exit = false;
 
 		while(~exit){
-		//key pressed initialization
-		let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
+			//key pressed initialization
+			let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
 
-		//display
-        do firework1.displayAll();
-        do firework2.displayAll();
-        do firework3.displayAll();
-        do firework4.displayAll();
-        do firework5.displayAll();
+			//display
+	        do firework1.displayAll();
+	        do firework2.displayAll();
+	        do firework3.displayAll();
+	        do firework4.displayAll();
+	        do firework5.displayAll();
 
-        //move
-        do firework1.moveAll();
-        do firework2.moveAll();
-        do firework3.moveAll();
-        do firework4.moveAll();
-        do firework5.moveAll();
+	        //move
+	        do firework1.moveAll();
+	        do firework2.moveAll();
+	        do firework3.moveAll();
+	        do firework4.moveAll();
+	        do firework5.moveAll();
 
-        //ball
-        do ball1.display(); //first display to draw at original position
-        do ball1.move();
+	        //ball
+	        do ball1.display(); //first display to draw at original position
+	        do ball1.move();
+	        //do ball1.bounce();
 
-        if(bx<0 | bx>512 | by<0 | by>256){
-        	do System.printString("out of bounds");
-        	do ball1.reset();
-        }
-
-        //key presses
-        if (key = 69){ //if key is e
-        	let exit = true;
-        }//69 e
+	        //key presses
+	        if (key = 69){ //if key is e
+	        	let exit = true;
+	        }//69 e
 		}//while exit is not true
 
         //fix ball movement

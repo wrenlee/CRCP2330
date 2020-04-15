@@ -5,8 +5,8 @@ class Ball{
 	constructor Ball new(){
 		let x = 512/2;
 		let y = 256/2;
-		let xSpeed = 10; 
-		let ySpeed = 10; 
+		let xSpeed = 5; 
+		let ySpeed = 5; 
 		return this;
 	}
 
@@ -16,19 +16,47 @@ class Ball{
 		return;
 	}
 
+	method void incSpeed(){
+		while(xSpeed > 20){
+			let xSpeed = xSpeed + 1;
+		}
+		if(xSpeed > 20){
+			let xSpeed = 5;
+		}
+
+		while(ySpeed > 20){
+			let ySpeed = ySpeed + 1;
+		}
+		if(ySpeed > 20){
+			let ySpeed = 5;
+		}
+		return;
+	}
+
 	method void move(){
 		do Screen.setColor(false); //makes the previous circle invisible
 		do Screen.drawCircle(x, y, 5);
-
-		let x = x + xSpeed;
-		let y = y + ySpeed;
+		
+		if((x+5)>10 & (x+5)<500 & (y+5)>10 & (y+5)<240){//if it's on the screen it can move
+			let x = x + xSpeed;
+			let y = y + ySpeed;
+		}
+		else{
+			//do incSpeed();
+			let xSpeed = xSpeed * -1;
+			let ySpeed = ySpeed * -1;
+			//let x = x - xSpeed;
+			//let y = y - ySpeed;
+			//do bounce(); //if it's outside of the screen, the speed changes
+		}
+		do Output.printInt(x);
 		do display();
 		return;
 	}
 
 	method void bounce(){
-		let x = x * -1;
-		let y = y * -1;
+		let xSpeed = xSpeed * -1;
+		let ySpeed = ySpeed * -1;
 		return;
 	}
 

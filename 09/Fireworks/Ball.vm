@@ -10,9 +10,9 @@ push constant 256
 push constant 2
 call Math.divide 2
 pop this 1
-push constant 10
+push constant 5
 pop this 2
-push constant 10
+push constant 5
 pop this 3
 push pointer 0
 return
@@ -30,6 +30,53 @@ call Screen.drawCircle 3
 pop temp 0
 push constant 0
 return
+function Ball.incSpeed 0
+push argument 0
+pop pointer 0
+label WHILE_EXP0
+push this 2
+push constant 20
+gt
+not
+if-goto WHILE_END0
+push this 2
+push constant 1
+add
+pop this 2
+goto WHILE_EXP0
+label WHILE_END0
+push this 2
+push constant 20
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 5
+pop this 2
+label IF_FALSE0
+label WHILE_EXP1
+push this 3
+push constant 20
+gt
+not
+if-goto WHILE_END1
+push this 3
+push constant 1
+add
+pop this 3
+goto WHILE_EXP1
+label WHILE_END1
+push this 3
+push constant 20
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 5
+pop this 3
+label IF_FALSE1
+push constant 0
+return
 function Ball.move 0
 push argument 0
 pop pointer 0
@@ -42,6 +89,32 @@ push constant 5
 call Screen.drawCircle 3
 pop temp 0
 push this 0
+push constant 5
+add
+push constant 10
+gt
+push this 0
+push constant 5
+add
+and
+push constant 500
+lt
+push this 1
+push constant 5
+add
+and
+push constant 10
+gt
+push this 1
+push constant 5
+add
+and
+push constant 240
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
 push this 2
 add
 pop this 0
@@ -49,6 +122,22 @@ push this 1
 push this 3
 add
 pop this 1
+goto IF_END0
+label IF_FALSE0
+push this 2
+push constant 1
+neg
+call Math.multiply 2
+pop this 2
+push this 3
+push constant 1
+neg
+call Math.multiply 2
+pop this 3
+label IF_END0
+push this 0
+call Output.printInt 1
+pop temp 0
 push pointer 0
 call Ball.display 1
 pop temp 0
@@ -57,16 +146,16 @@ return
 function Ball.bounce 0
 push argument 0
 pop pointer 0
-push this 0
+push this 2
 push constant 1
 neg
 call Math.multiply 2
-pop this 0
-push this 1
+pop this 2
+push this 3
 push constant 1
 neg
 call Math.multiply 2
-pop this 1
+pop this 3
 push constant 0
 return
 function Ball.reset 0
