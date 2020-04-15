@@ -26,6 +26,10 @@ class Game{
 		let exit = false;
 
 		while(~exit){
+			//ball
+	        do ball1.display(); //first display to draw at original position
+	        do ball1.move();
+
 			//key pressed initialization
 			let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
 
@@ -43,17 +47,12 @@ class Game{
 	        do firework4.moveAll();
 	        do firework5.moveAll();
 
-	        //ball
-	        do ball1.display(); //first display to draw at original position
-	        do ball1.move();
-
 	        //key presses
 	        if (key = 69){ //if key is e
 	        	let exit = true;
 	        }//69 e
 		}//while exit is not true
 
-        //fix ball movement
         //add in paddle, moves left and right
         //add in block to bounce off of 
         //if touch firework, reset
