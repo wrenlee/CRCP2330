@@ -36,6 +36,10 @@ return
 function Paddle.move 0
 push argument 0
 pop pointer 0
+push argument 1
+pop this 7
+push argument 2
+pop this 6
 push constant 0
 call Screen.setColor 1
 pop temp 0

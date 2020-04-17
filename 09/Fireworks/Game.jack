@@ -38,21 +38,19 @@ class Game{
 			let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
 
 			//key presses
-	        if(key = 37){
-	        	do Output.printString("left true");
+	        if(key = 130){
 	        	let left = true;
 	        }//left
-	        //else{
-	        //	let left = false;
-	        //}//left else
-	        if(key = 39){
-	        	do Output.printString("right true");
+	        else{
+	        	let left = false;
+	        }
+	        if(key = 132){
 	        	let right = true;
 	        }//right
-	        //else{
-	        //	let right = false;
-	        //}//right else
-	         if (key = 69){ //if key is e
+	        else{
+	        	let right = false;
+	        }
+	        if (key = 69){ //if key is e
 	        	let exit = true;
 	        }//69 e
 			
@@ -82,11 +80,6 @@ class Game{
 	        do firework5.moveAll();
 
 		}//while exit is not true
-
-        //add in paddle, moves left and right
-        //add in block to bounce off of 
-        //if touch firework, reset
-        //press e to exit
 
 		return;
 	}//run

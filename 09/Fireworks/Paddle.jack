@@ -22,6 +22,10 @@ class Paddle{
 	}
 
 	method void move(boolean l, boolean r){
+		//variables equal to the booleans
+		let left = l;
+		let right = r;
+
 		do Screen.setColor(false); //colors previous rectangle
 		do Screen.drawRectangle(x, y, x+width, y+height);
 
