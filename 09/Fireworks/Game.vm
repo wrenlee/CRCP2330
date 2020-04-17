@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 6
+push constant 7
 call Memory.alloc 1
 pop pointer 0
 push constant 50
@@ -24,6 +24,9 @@ call Firework.new 2
 pop this 4
 call Ball.new 0
 pop this 5
+push constant 2
+call Paddle.new 1
+pop this 6
 push pointer 0
 return
 function Game.run 2
@@ -42,48 +45,61 @@ pop temp 0
 push this 5
 call Ball.move 1
 pop temp 0
-call Keyboard.keyPressed 0
-pop local 1
-push this 0
-call Firework.displayAll 1
-pop temp 0
-push this 1
-call Firework.displayAll 1
-pop temp 0
-push this 2
-call Firework.displayAll 1
-pop temp 0
-push this 3
-call Firework.displayAll 1
-pop temp 0
-push this 4
-call Firework.displayAll 1
-pop temp 0
-push this 0
-call Firework.moveAll 1
-pop temp 0
-push this 1
-call Firework.moveAll 1
-pop temp 0
-push this 2
-call Firework.moveAll 1
-pop temp 0
-push this 3
-call Firework.moveAll 1
-pop temp 0
-push this 4
-call Firework.moveAll 1
-pop temp 0
-push local 1
-push constant 69
-eq
+push this 6
+push this 5
+call Ball.getX 1
+push this 5
+call Ball.getY 1
+call Paddle.isClose 3
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push this 5
+call Ball.bounce 1
+pop temp 0
+label IF_FALSE0
+push this 0
+call Firework.displayAll 1
+pop temp 0
+push this 1
+call Firework.displayAll 1
+pop temp 0
+push this 2
+call Firework.displayAll 1
+pop temp 0
+push this 3
+call Firework.displayAll 1
+pop temp 0
+push this 4
+call Firework.displayAll 1
+pop temp 0
+push this 0
+call Firework.moveAll 1
+pop temp 0
+push this 1
+call Firework.moveAll 1
+pop temp 0
+push this 2
+call Firework.moveAll 1
+pop temp 0
+push this 3
+call Firework.moveAll 1
+pop temp 0
+push this 4
+call Firework.moveAll 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 1
+push local 1
+push constant 69
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push constant 0
 not
 pop local 0
-label IF_FALSE0
+label IF_FALSE1
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
@@ -100,8 +116,17 @@ pop temp 0
 push this 2
 call Firework.memory 1
 pop temp 0
+push this 3
+call Firework.memory 1
+pop temp 0
+push this 4
+call Firework.memory 1
+pop temp 0
 push this 5
 call Ball.memory 1
+pop temp 0
+push this 6
+call Paddle.memory 1
 pop temp 0
 push constant 0
 return

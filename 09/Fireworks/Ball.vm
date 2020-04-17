@@ -141,6 +141,31 @@ call Ball.display 1
 pop temp 0
 push constant 0
 return
+function Ball.bounce 0
+push argument 0
+pop pointer 0
+push this 2
+push constant 1
+neg
+call Math.multiply 2
+pop this 2
+push this 3
+push constant 1
+neg
+call Math.multiply 2
+pop this 3
+push constant 0
+return
+function Ball.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Ball.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
 function Ball.memory 0
 push argument 0
 pop pointer 0

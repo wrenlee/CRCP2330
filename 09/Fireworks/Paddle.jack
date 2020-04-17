@@ -2,13 +2,16 @@ class Paddle{
 	field int x, y;
 	field int width, height;
 	field int xSpeed;
+	field boolean close; //to determine if the ball is close or not
+	field boolean right; //if right key is pressed
+	field boolean left; //if left key is pressed
 
-	constructor Paddle new(){
+	constructor Paddle new(int xS){
 		let x = 50;
 		let y = 400; //x and y positions to begin with
 		let width = 30;
 		let height = 20;
-		let xSpeed = 10;
+		let xSpeed = xS;
 		return this;
 	}
 
@@ -18,20 +21,35 @@ class Paddle{
 		return;
 	}
 
-	method void move(){
+	method void move(boolean l, boolean r){
+		let press = key;
 		do Screen.setColor(false); //colors previous rectangle
 		do Screen.drawRectangle(x, y, x+width, y+height);
 
-		let x = x + xSpeed; //advances rectangle to move
-		do Screen.drawRectangle(x, y, x+width, y+height); //draw new rectangle
+		if(right){
+			let x = x + xSpeed; //advances rectangle to move
+		}
+		if(left){
+			let x = x - xSpeed; //advances rectangle to move
+		}
+
+		if((x < 10) | (x > 500)){ //bounce if going out of bounds
+			let xSpeed = xSpeed * -1;
+		}
+		do display();
 		return;
 	}
 
-	method int getX(){
-		return x;
-	} 
+	method boolean isClose(int ballX, int ballY){
 
-	method int getY(){
-		return y;
+		if(((ballX > x) & (ballX < (x+width))) & ((ballY < y) & (ballY < (y+height)))){
+			let close = true;
+		}
+		return close;
+	}
+
+	method void memory(){
+		do Memory.deAlloc(this);
+		return;
 	}
 }

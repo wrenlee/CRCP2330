@@ -8,6 +8,8 @@ class Game{
 
         field Ball ball1;
 
+        field Paddle paddle1;
+
 	constructor Game new(){
 		//init
         let firework1 = Firework.new(50, 50);
@@ -16,22 +18,41 @@ class Game{
         let firework4 = Firework.new(100, 150);
         let firework5 = Firework.new(370, 170);
         let ball1 = Ball.new();
+        let paddle1 = Paddle.new(2); //2 is the speed
         return this;
 	}
 
 	method void run(){
-		//screen 512 col x 256 rows
-		var boolean exit;
 		var char key;
+		//booleans for key pressed functionality
+		var boolean exit;
 		let exit = false;
+		var boolean right;
+		var boolean left;
+		let right = false;
+		let left = false;
 
 		while(~exit){
+			//key pressed initialization
+			let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
+			//key presses
+	        if (key = 69){ //if key is e
+	        	let exit = true;
+	        }//69 e
+	        if(key = ){
+	        	let 
+	        }
+			
 			//ball
 	        do ball1.display(); //first display to draw at original position
 	        do ball1.move();
 
-			//key pressed initialization
-			let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
+			//paddle
+			do paddle1.display();
+			do paddle1.move(left, right);
+			if (paddle1.isClose(ball1.getX(), ball1.getY())){ //if the ball is close to the paddle
+				do ball1.bounce();
+			}//paddle close
 
 			//display
 	        do firework1.displayAll();
@@ -47,10 +68,6 @@ class Game{
 	        do firework4.moveAll();
 	        do firework5.moveAll();
 
-	        //key presses
-	        if (key = 69){ //if key is e
-	        	let exit = true;
-	        }//69 e
 		}//while exit is not true
 
         //add in paddle, moves left and right
@@ -66,7 +83,10 @@ class Game{
         do firework1.memory();
         do firework2.memory();
         do firework3.memory();
+        do firework4.memory();
+        do firework5.memory();
         do ball1.memory();
+        do paddle1.memory();
 		return;
 	}
 }

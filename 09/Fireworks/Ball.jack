@@ -52,6 +52,20 @@ class Ball{
 		return;
 	}
 
+	method void bounce(){
+		let xSpeed = xSpeed * -1;
+		let ySpeed = ySpeed *-1;
+		return;
+	}
+
+	method int getX(){//getter for x position
+		return x;
+	}
+
+	method int getY(){//getter for y position
+		return y;
+	}
+
 	method void memory(){
 		do Memory.deAlloc(this);
 		return;
