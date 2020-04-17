@@ -26,22 +26,33 @@ class Game{
 		var char key;
 		//booleans for key pressed functionality
 		var boolean exit;
-		let exit = false;
 		var boolean right;
 		var boolean left;
+
+		let exit = false;
 		let right = false;
 		let left = false;
 
 		while(~exit){
 			//key pressed initialization
 			let key = Keyboard.keyPressed(); //whatever the key is pressed, that's the key variable
+
 			//key presses
-	        if (key = 69){ //if key is e
+	        if(key = 37){
+	        	let left = true;
+	        }//left
+	        else{
+	        	let left = false;
+	        }//left else
+	        if(key = 39){
+	        	let right = true;
+	        }//right
+	        else{
+	        	let right = false;
+	        }//right else
+	         if (key = 69){ //if key is e
 	        	let exit = true;
 	        }//69 e
-	        if(key = ){
-	        	let 
-	        }
 			
 			//ball
 	        do ball1.display(); //first display to draw at original position
@@ -49,10 +60,10 @@ class Game{
 
 			//paddle
 			do paddle1.display();
-			do paddle1.move(left, right);
-			if (paddle1.isClose(ball1.getX(), ball1.getY())){ //if the ball is close to the paddle
-				do ball1.bounce();
-			}//paddle close
+			//do paddle1.move(left, right);
+			//if (paddle1.isClose(ball1.getX(), ball1.getY())){ //if the ball is close to the paddle
+			//	do ball1.bounce();
+			//}//paddle close
 
 			//display
 	        do firework1.displayAll();

@@ -29,16 +29,60 @@ call Paddle.new 1
 pop this 6
 push pointer 0
 return
-function Game.run 2
+function Game.run 4
 push argument 0
 pop pointer 0
 push constant 0
-pop local 0
+pop local 1
+push constant 0
+pop local 2
+push constant 0
+pop local 3
 label WHILE_EXP0
-push local 0
+push local 1
 not
 not
 if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 0
+push local 0
+push constant 37
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop local 3
+goto IF_END0
+label IF_FALSE0
+push constant 0
+pop local 3
+label IF_END0
+push local 0
+push constant 39
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+not
+pop local 2
+goto IF_END1
+label IF_FALSE1
+push constant 0
+pop local 2
+label IF_END1
+push local 0
+push constant 69
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+not
+pop local 1
+label IF_FALSE2
 push this 5
 call Ball.display 1
 pop temp 0
@@ -46,18 +90,8 @@ push this 5
 call Ball.move 1
 pop temp 0
 push this 6
-push this 5
-call Ball.getX 1
-push this 5
-call Ball.getY 1
-call Paddle.isClose 3
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 5
-call Ball.bounce 1
+call Paddle.display 1
 pop temp 0
-label IF_FALSE0
 push this 0
 call Firework.displayAll 1
 pop temp 0
@@ -88,18 +122,6 @@ pop temp 0
 push this 4
 call Firework.moveAll 1
 pop temp 0
-call Keyboard.keyPressed 0
-pop local 1
-push local 1
-push constant 69
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 0
-not
-pop local 0
-label IF_FALSE1
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0

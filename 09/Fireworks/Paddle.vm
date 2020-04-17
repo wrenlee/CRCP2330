@@ -1,10 +1,10 @@
 function Paddle.new 0
-push constant 6
+push constant 8
 call Memory.alloc 1
 pop pointer 0
 push constant 50
 pop this 0
-push constant 400
+push constant 230
 pop this 1
 push constant 30
 pop this 2
@@ -49,10 +49,24 @@ push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
+push this 6
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push this 0
 push this 4
 add
 pop this 0
+label IF_FALSE0
+push this 7
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 0
+push this 4
+sub
+pop this 0
+label IF_FALSE1
 push this 0
 push constant 10
 lt
@@ -60,15 +74,15 @@ push this 0
 push constant 500
 gt
 or
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push this 4
 push constant 1
 neg
 call Math.multiply 2
 pop this 4
-label IF_FALSE0
+label IF_FALSE2
 push pointer 0
 call Paddle.display 1
 pop temp 0
