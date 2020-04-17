@@ -18,7 +18,7 @@ class Game{
         let firework4 = Firework.new(100, 150);
         let firework5 = Firework.new(370, 170);
         let ball1 = Ball.new();
-        let paddle1 = Paddle.new(2); //2 is the speed
+        let paddle1 = Paddle.new(1); //2 is the speed
         return this;
 	}
 
@@ -39,17 +39,19 @@ class Game{
 
 			//key presses
 	        if(key = 37){
+	        	do Output.printString("left true");
 	        	let left = true;
 	        }//left
-	        else{
-	        	let left = false;
-	        }//left else
+	        //else{
+	        //	let left = false;
+	        //}//left else
 	        if(key = 39){
+	        	do Output.printString("right true");
 	        	let right = true;
 	        }//right
-	        else{
-	        	let right = false;
-	        }//right else
+	        //else{
+	        //	let right = false;
+	        //}//right else
 	         if (key = 69){ //if key is e
 	        	let exit = true;
 	        }//69 e
@@ -60,7 +62,7 @@ class Game{
 
 			//paddle
 			do paddle1.display();
-			//do paddle1.move(left, right);
+			do paddle1.move(left, right);
 			//if (paddle1.isClose(ball1.getX(), ball1.getY())){ //if the ball is close to the paddle
 			//	do ball1.bounce();
 			//}//paddle close

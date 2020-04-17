@@ -10,7 +10,7 @@ class Paddle{
 		let x = 50;
 		let y = 230; //x and y positions to begin with
 		let width = 30;
-		let height = 20;
+		let height = 10;
 		let xSpeed = xS;
 		return this;
 	}
@@ -25,6 +25,8 @@ class Paddle{
 		do Screen.setColor(false); //colors previous rectangle
 		do Screen.drawRectangle(x, y, x+width, y+height);
 
+		//let x = x + xSpeed;
+
 		if(right){
 			let x = x + xSpeed; //advances rectangle to move
 		}
@@ -32,9 +34,10 @@ class Paddle{
 			let x = x - xSpeed; //advances rectangle to move
 		}
 
-		if((x < 10) | (x > 500)){
+		if(((x+30) < 40) | ((x+30) > 500)){
 			let xSpeed = xSpeed * -1;
 		}//bounce if going out of bounds
+
 		do display();
 		return;
 	}

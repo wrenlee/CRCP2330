@@ -8,7 +8,7 @@ push constant 230
 pop this 1
 push constant 30
 pop this 2
-push constant 20
+push constant 10
 pop this 3
 push argument 0
 pop this 4
@@ -68,9 +68,13 @@ sub
 pop this 0
 label IF_FALSE1
 push this 0
-push constant 10
+push constant 30
+add
+push constant 40
 lt
 push this 0
+push constant 30
+add
 push constant 500
 gt
 or
