@@ -124,7 +124,7 @@ lt
 push this 1
 push constant 5
 add
-push constant 240
+push constant 245
 gt
 or
 if-goto IF_TRUE1

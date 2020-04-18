@@ -18,12 +18,13 @@ class Game{
         let firework4 = Firework.new(100, 150);
         let firework5 = Firework.new(370, 170);
         let ball1 = Ball.new();
-        let paddle1 = Paddle.new(1); //2 is the speed
+        let paddle1 = Paddle.new(2); //2 is the speed
         return this;
 	}
 
 	method void run(){
 		var char key;
+
 		//booleans for key pressed functionality
 		var boolean exit;
 		var boolean right;
@@ -44,43 +45,43 @@ class Game{
 	        else{
 	        	let left = false;
 	        }
+
 	        if(key = 132){
 	        	let right = true;
 	        }//right
 	        else{
 	        	let right = false;
 	        }
+
 	        if (key = 69){ //if key is e
 	        	let exit = true;
-	        }//69 e
-			
-			//ball
-	        do ball1.display(); //first display to draw at original position
-	        do ball1.move();
+	        }//69
 
-			//paddle
-			do paddle1.display();
+		    do paddle1.display();
 			do paddle1.move(left, right);
-			//if (paddle1.isClose(ball1.getX(), ball1.getY())){ //if the ball is close to the paddle
-			//	do ball1.bounce();
-			//}//paddle close
+			if (paddle1.isClose(ball1.getX(), ball1.getY())){ //if the ball is close to the paddle
+				do Output.println(1);
+				do ball1.bounce();
+			}//paddle close
+				
+			//ball
+		    do ball1.display(); //first display to draw at original position
+		    do ball1.move();
 
 			//display
-	        do firework1.displayAll();
-	        do firework2.displayAll();
-	        do firework3.displayAll();
-	        do firework4.displayAll();
-	        do firework5.displayAll();
+		    do firework1.displayAll();
+		    do firework2.displayAll();
+		    do firework3.displayAll();
+		    do firework4.displayAll();
+		    do firework5.displayAll();
 
-	        //move
-	        do firework1.moveAll();
-	        do firework2.moveAll();
-	        do firework3.moveAll();
-	        do firework4.moveAll();
-	        do firework5.moveAll();
-
+		    //move
+		    do firework1.moveAll();
+		    do firework2.moveAll();
+		    do firework3.moveAll();
+		    do firework4.moveAll();
+		    do firework5.moveAll();
 		}//while exit is not true
-
 		return;
 	}//run
 

@@ -44,9 +44,19 @@ class Ball{
 		if(((x+5)<20) | ((x+5)>500)){//position and radius of the ball
 			let xSpeed = xSpeed * -1;
 		}
-		if(((y+5)<20) | ((y+5)>240)){//bounce y
+
+		if(((y+5)<20) | ((y+5)>245)){//bounce y
 			let ySpeed = ySpeed * -1;
 		}
+
+		/**
+		if((y+5)<20){//bounce y top
+			let ySpeed = ySpeed * -1;
+		}
+		if((y+5)>240){//y bottom
+			//let y = 30;
+		}
+		*/
 
 		do display();
 		return;

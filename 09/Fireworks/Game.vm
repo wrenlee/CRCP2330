@@ -24,7 +24,7 @@ call Firework.new 2
 pop this 4
 call Ball.new 0
 pop this 5
-push constant 1
+push constant 2
 call Paddle.new 1
 pop this 6
 push pointer 0
@@ -83,12 +83,6 @@ push constant 0
 not
 pop local 1
 label IF_FALSE2
-push this 5
-call Ball.display 1
-pop temp 0
-push this 5
-call Ball.move 1
-pop temp 0
 push this 6
 call Paddle.display 1
 pop temp 0
@@ -96,6 +90,28 @@ push this 6
 push local 3
 push local 2
 call Paddle.move 3
+pop temp 0
+push this 6
+push this 5
+call Ball.getX 1
+push this 5
+call Ball.getY 1
+call Paddle.isClose 3
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 1
+call Output.println 1
+pop temp 0
+push this 5
+call Ball.bounce 1
+pop temp 0
+label IF_FALSE3
+push this 5
+call Ball.display 1
+pop temp 0
+push this 5
+call Ball.move 1
 pop temp 0
 push this 0
 call Firework.displayAll 1
