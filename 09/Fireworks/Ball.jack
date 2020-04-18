@@ -33,7 +33,7 @@ class Ball{
 		return;
 	}
 
-	method void move(){
+	method void move(boolean shouldBounce){
 		do Screen.setColor(false); //makes the previous circle invisible
 		do Screen.drawCircle(x, y, 5);
 
@@ -41,7 +41,7 @@ class Ball{
 		let y = y + ySpeed;
 
 		//if ball is outside of the screen
-		if(((x+5)<20) | ((x+5)>500)){//position and radius of the ball
+		if(((x+5)<20) | ((x+5)>450)){//position and radius of the ball
 			let xSpeed = xSpeed * -1;
 		}
 
@@ -49,14 +49,10 @@ class Ball{
 			let ySpeed = ySpeed * -1;
 		}
 
-		/**
-		if((y+5)<20){//bounce y top
-			let ySpeed = ySpeed * -1;
+		if(shouldBounce){//is should bounce
+			let xSpeed = xSpeed * -1;
+			let ySpeed = ySpeed *-1;
 		}
-		if((y+5)>240){//y bottom
-			//let y = 30;
-		}
-		*/
 
 		do display();
 		return;

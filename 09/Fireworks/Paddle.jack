@@ -29,8 +29,6 @@ class Paddle{
 		do Screen.setColor(false); //colors previous rectangle
 		do Screen.drawRectangle(x, y, x+width, y+height);
 
-		//let x = x + xSpeed;
-
 		if(right){
 			let x = x + xSpeed; //advances rectangle to move
 		}
@@ -38,20 +36,16 @@ class Paddle{
 			let x = x - xSpeed; //advances rectangle to move
 		}
 
-		/**
-		if(((x+30) < 40) | ((x+30) > 500)){
-			let xSpeed = xSpeed * -1;
-		}//bounce if going out of bounds
-		*/
-
 		do display();
 		return;
 	}
 
 	method boolean isClose(int ballX, int ballY){
-		if(((ballX > x-5) & (ballX < (x+width))) & (y>230)){
-			do Output.printInt(1);
+		if((ballX > x-5) & (ballX < (x+width)) & (ballY>230)){
 			let close = true;
+		}
+		else{
+			let close = false;
 		}
 		return close;
 	}

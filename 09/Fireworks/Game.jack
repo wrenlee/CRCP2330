@@ -59,14 +59,15 @@ class Game{
 
 		    do paddle1.display();
 			do paddle1.move(left, right);
+			/**
 			if (paddle1.isClose(ball1.getX(), ball1.getY())){ //if the ball is close to the paddle
-				do Output.println(1);
 				do ball1.bounce();
 			}//paddle close
+			*/
 				
 			//ball
 		    do ball1.display(); //first display to draw at original position
-		    do ball1.move();
+		    do ball1.move(paddle1.isClose(ball1.getX(), ball1.getY()));
 
 			//display
 		    do firework1.displayAll();
