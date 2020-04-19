@@ -1,5 +1,5 @@
 function Ball.new 0
-push constant 4
+push constant 5
 call Memory.alloc 1
 pop pointer 0
 push constant 512
@@ -137,20 +137,7 @@ call Math.multiply 2
 pop this 3
 label IF_FALSE1
 push argument 1
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push this 2
-push constant 1
-neg
-call Math.multiply 2
-pop this 2
-push this 3
-push constant 1
-neg
-call Math.multiply 2
-pop this 3
-label IF_FALSE2
+pop this 4
 push pointer 0
 call Ball.display 1
 pop temp 0
@@ -180,6 +167,11 @@ function Ball.getY 0
 push argument 0
 pop pointer 0
 push this 1
+return
+function Ball.ballClose 0
+push argument 0
+pop pointer 0
+push this 4
 return
 function Ball.memory 0
 push argument 0

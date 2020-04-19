@@ -103,6 +103,18 @@ call Ball.getY 1
 call Paddle.isClose 3
 call Ball.move 2
 pop temp 0
+push this 5
+call Ball.ballClose 1
+push constant 0
+not
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+not
+pop local 1
+label IF_FALSE3
 push this 0
 call Firework.displayAll 1
 pop temp 0

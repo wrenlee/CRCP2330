@@ -36,12 +36,16 @@ class Paddle{
 			let x = x - xSpeed; //advances rectangle to move
 		}
 
+		if((x<0) | ((x+width)>500)){//outside of bounds for x
+			let x = 300;
+		}
+
 		do display();
 		return;
 	}
 
 	method boolean isClose(int ballX, int ballY){
-		if((ballX > x-5) & (ballX < (x+width)) & (ballY>230)){
+		if((ballX > x) & (ballX < (x+width)) & (ballY>240)){
 			let close = true;
 		}
 		else{

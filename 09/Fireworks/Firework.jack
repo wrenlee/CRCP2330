@@ -47,7 +47,7 @@ class Firework{
 		do p7.move();
 		do p8.move();
 		return;
-	}
+	} 
 
 	method void memory(){
 		do p1.memory();

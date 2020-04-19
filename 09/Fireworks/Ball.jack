@@ -1,6 +1,7 @@
 class Ball{
 	field int x, y;
 	field int xSpeed, ySpeed;
+	field boolean isClose;
 
 	constructor Ball new(){
 		let x = 512/2;
@@ -33,7 +34,7 @@ class Ball{
 		return;
 	}
 
-	method void move(boolean shouldBounce){
+	method void move(boolean close){
 		do Screen.setColor(false); //makes the previous circle invisible
 		do Screen.drawCircle(x, y, 5);
 
@@ -49,10 +50,18 @@ class Ball{
 			let ySpeed = ySpeed * -1;
 		}
 
-		if(shouldBounce){//is should bounce
-			let xSpeed = xSpeed * -1;
-			let ySpeed = ySpeed *-1;
+		/**
+		if((y+5)<20){//top of screen
+			let ySpeed = ySpeed * -1;
 		}
+
+		if((y+5)>245){//y past end of screen
+			do Sys.wait(20);
+			let y = 20;
+		}
+		*/
+
+		let isClose = close;
 
 		do display();
 		return;
@@ -70,6 +79,10 @@ class Ball{
 
 	method int getY(){//getter for y position
 		return y;
+	}
+
+	method boolean ballClose(){
+		return isClose;
 	}
 
 	method void memory(){

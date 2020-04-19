@@ -71,6 +71,21 @@ push this 4
 sub
 pop this 0
 label IF_FALSE1
+push this 0
+push constant 0
+lt
+push this 0
+push this 2
+add
+push constant 500
+gt
+or
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 300
+pop this 0
+label IF_FALSE2
 push pointer 0
 call Paddle.display 1
 pop temp 0
@@ -82,8 +97,6 @@ pop pointer 0
 push argument 1
 push this 0
 gt
-push constant 5
-sub
 push argument 1
 push this 0
 push this 2
@@ -91,7 +104,7 @@ add
 lt
 and
 push argument 2
-push constant 230
+push constant 240
 gt
 and
 if-goto IF_TRUE0
