@@ -37,7 +37,7 @@ class Paddle{
 		}
 
 		if((x<0) | ((x+width)>500)){//outside of bounds for x
-			let x = 300;
+			let x = 250;
 		}
 
 		do display();
