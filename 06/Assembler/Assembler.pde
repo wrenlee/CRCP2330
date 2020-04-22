@@ -1,4 +1,9 @@
+//Wren Lee assembler
+//crcp 2330 - nand 2 tetris
+
+//variables
 String file;
+
 Parser p;
 
 void setup() {
@@ -6,8 +11,8 @@ void setup() {
   file = file + ".asm"; //creates file
   
   p = new Parser(file);
+  p.readFile();
 }//end setup
 
 void draw() {
-  p.loadFile();
 }//end draw
