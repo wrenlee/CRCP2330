@@ -11,8 +11,8 @@ void setup() {
   file = file + ".asm"; //creates file
   
   p = new Parser(file);
-  p.readFile();
 }//end setup
 
 void draw() {
+  p.readFile();
 }//end draw
