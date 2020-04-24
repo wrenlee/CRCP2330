@@ -5,7 +5,6 @@
 class Parser {
   BufferedReader reader;
   String line;
-  boolean skipLine;
   boolean hasNextLine;
   char type;
   String comp, dest, jump;
@@ -13,7 +12,6 @@ class Parser {
   Parser(String file) {
     reader = createReader(file); //create reader file
     hasNextLine = true;
-    skipLine = false;
     comp = "";
     dest = "";
     jump = "";
@@ -22,29 +20,36 @@ class Parser {
   void readFile() {
     try {
       line = reader.readLine();
-      //cleanLine();
-      if (skipLine == false && hasNextLine == true) {
-        commandType();//determines command type
-      }//if it's not a comment and there's another line
+      
+      if(line == null){
+        hasNextLine = false;
+      }//line null
+      
+      cleanComments();
+      
+      if (line.length()>0 && hasNextLine == true) {
+        //commandType();//determines command type
+      }//if it's not empty space and has another line
     }//end try
 
     catch(IOException e) {
       e.printStackTrace();
       hasNextLine = false;
     }//catch 
-    println(line + " --> " + type + " --> " + getSymbol());
+   // println(line + " --> " + type + " --> " + getSymbol());
   }//end read file
 
-  void cleanLine() {//take out white space and comments
+  void cleanComments() {//take out comments
     if (line.contains("//")) {
+      //println(line);
       String[] tempStr = new String[10];
-      tempStr = line.split("/"); //splits comment
+      tempStr = line.split("//"); //splits comment
+      //println("Temp before " + tempStr[0] + " + " + tempStr[1]);
       tempStr[1] = ""; //replaces the comment part with an empty string
-      line = tempStr.toString(); //makes it into a string
+      //println("Temp after " + tempStr[0] + " + " + tempStr[1]);
+      line = tempStr[0]; //makes it into a string
+      //println("AFTER " + line);
     }//comments
-    if (line.length() == 0) {
-      skipLine = true;
-    }//empty line
   }//clean line end
 
   void commandType() {
@@ -63,10 +68,10 @@ class Parser {
     String symbol = ""; //empty symbol
     int length = line.length();
     if (type == 'a') {
-      symbol = line.substring(1, length-1);//takes out the @ symbol
+      symbol = line.substring(1, length);//takes out the @ symbol
     }//a instruction
     else if (type == 'l') {
-      symbol = line.substring(1, length-2); //takes out parenthesis
+      symbol = line.substring(1, length-1); //takes out parenthesis
     }//label
     return symbol;
   }//get symbol
