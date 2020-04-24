@@ -4,14 +4,14 @@
 
 class Parser {
   BufferedReader reader;
-  String line;
-  boolean hasNextLine;
-  char type;
+  StringList line;
+  StringList typeList;
   String comp, dest, jump;
 
   Parser(String file) {
     reader = createReader(file); //create reader file
-    hasNextLine = true;
+    line = new StringList(); //create stringlist
+    typeList = new StringList();
     comp = "";
     dest = "";
     jump = "";
@@ -19,61 +19,57 @@ class Parser {
 
   void readFile() {
     try {
-      line = reader.readLine();
-      
-      if(line == null){
-        hasNextLine = false;
-      }//line null
-      
-      //cleanComments();
-      
-      if (line.length()>0 && hasNextLine == true) {
-        //commandType();//determines command type
-      }//if it's not empty space and has another line
+      line.append(reader.readLine()); //adds line to stringlist
     }//end try
-
     catch(IOException e) {
       e.printStackTrace();
-      line = null;
-      //hasNextLine = false;
-    }//catch 
-   // println(line + " --> " + type + " --> " + getSymbol());
-   println(line);
-  }//end read file
+    }//catch
+  }//read file
 
-  void cleanComments() {//take out comments
-    if (line.contains("//")) {
-      //println(line);
-      String[] tempStr = new String[10];
-      tempStr = line.split("//"); //splits comment
-      //println("Temp before " + tempStr[0] + " + " + tempStr[1]);
-      tempStr[1] = ""; //replaces the comment part with an empty string
-      //println("Temp after " + tempStr[0] + " + " + tempStr[1]);
-      line = tempStr[0]; //makes it into a string
-      //println("AFTER " + line);
-    }//comments
+  void analyzeFile() {
+    cleanComments();
+    for (int i = 0; i < line.size(); i++) {
+      typeList.set(i, commandType(i));//determines command type
+      //println(line.get(index-1) + " --> " + type + " --> " + getSymbol(i));
+    }//for line loop
+  }//end analyze file
+
+  void cleanComments() {
+    //take out comments
+    for (int i = 0; i < line.size(); i++) {
+      if (line.get(i).contains("//")) {
+        String[] tempStr = new String[10];
+        tempStr = line.get(i).split("//"); //splits comment
+        //println("Temp before " + tempStr[0] + " + " + tempStr[1]);
+        tempStr[1] = ""; //replaces the comment part with an empty string
+        //println("Temp after " + tempStr[0] + " + " + tempStr[1]);
+        line.set(i, tempStr[0]); //makes it into a string
+      }//comments
+    }//for loop
   }//clean line end
 
-  void commandType() {
-    if (line.contains("@")) {
-      type = 'a';
+  String commandType(int i) {
+    String type;
+    if (line.get(i).contains("@")) {
+      type = "a";
     }//a instruction
-    else if (line.contains("(")) {
-      type = 'l';
+    else if (line.get(i).contains("(")) {
+      type = "l";
     }//label
     else {
-      type = 'c';
+      type = "c";
     }//c instruction
+    return type;
   }//command type
 
-  String getSymbol() {
+  String getSymbol(int i) {
     String symbol = ""; //empty symbol
-    int length = line.length();
-    if (type == 'a') {
-      symbol = line.substring(1, length);//takes out the @ symbol
+    int length = line.get(i).length();
+    if (typeList.get(i) == "a") {
+      symbol = line.get(i).substring(1, length);//takes out the @ symbol
     }//a instruction
-    else if (type == 'l') {
-      symbol = line.substring(1, length-1); //takes out parenthesis
+    else if (typeList.get(i) == "l") {
+      symbol = line.get(i).substring(1, length-1); //takes out parenthesis
     }//label
     return symbol;
   }//get symbol
@@ -90,8 +86,8 @@ c instruction to do:
    -->if it doesn't then jump is null
    -->if it does, it'll split into comp and jump
    */
-  void cInstruction() {
-    if (type == 'c') {
+  void cInstruction(int i) {
+    if (typeList.get(i) == "c") {
     }//if it's a c instruction
   }//c instruction
 

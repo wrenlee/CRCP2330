@@ -15,4 +15,5 @@ void setup() {
 
 void draw() {
   p.readFile();
+  p.analyzeFile();
 }//end draw
