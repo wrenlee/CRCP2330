@@ -24,19 +24,25 @@ class Parser {
     catch(IOException e) {
       e.printStackTrace();
     }//catch
+    
+    for (int i = 0; i < line.size(); i++) {
+      if (line.get(i) == null) {    
+        noLoop(); //stop loop if out of text
+      }//if null stop
+    }//for loop
   }//read file
 
   void analyzeFile() {
     cleanComments();
     for (int i = 0; i < line.size(); i++) {
-      typeList.set(i, commandType(i));//determines command type
+      //  typeList.set(i, commandType(i));//determines command type
       //println(line.get(index-1) + " --> " + type + " --> " + getSymbol(i));
     }//for line loop
   }//end analyze file
 
   void cleanComments() {
     //take out comments
-    for (int i = 0; i < line.size(); i++) {
+    for (int i = 0; i < line.size()-1; i++) {
       if (line.get(i).contains("//")) {
         String[] tempStr = new String[10];
         tempStr = line.get(i).split("//"); //splits comment

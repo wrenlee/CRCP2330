@@ -14,6 +14,6 @@ void setup() {
 }//end setup
 
 void draw() {
-  p.readFile();
+  p.readFile(); //adds strings to string list
   p.analyzeFile();
 }//end draw
