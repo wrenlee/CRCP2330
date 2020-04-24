@@ -22,7 +22,7 @@ class Parser {
   void readFile() {
     try {
       line = reader.readLine();
-
+      //cleanLine();
       if (skipLine == false && hasNextLine == true) {
         commandType();//determines command type
       }//if it's not a comment and there's another line
@@ -35,14 +35,16 @@ class Parser {
     println(line + " --> " + type + " --> " + getSymbol());
   }//end read file
 
-  /*
-  if contain /, split based on the / 
-   --> comments
-   If the line length is 0
-   --> 
-   if either of these, skipLine = true
-   */
   void cleanLine() {//take out white space and comments
+    if (line.contains("//")) {
+      String[] tempStr = new String[10];
+      tempStr = line.split("/"); //splits comment
+      tempStr[1] = ""; //replaces the comment part with an empty string
+      line = tempStr.toString(); //makes it into a string
+    }//comments
+    if (line.length() == 0) {
+      skipLine = true;
+    }//empty line
   }//clean line end
 
   void commandType() {
@@ -55,16 +57,16 @@ class Parser {
     else {
       type = 'c';
     }//c instruction
-  }//advance
+  }//command type
 
   String getSymbol() {
     String symbol = ""; //empty symbol
     int length = line.length();
     if (type == 'a') {
-      symbol = line.substring(1, length);//takes out the @ symbol
+      symbol = line.substring(1, length-1);//takes out the @ symbol
     }//a instruction
     else if (type == 'l') {
-      symbol = line.substring(1, length-1); //takes out parenthesis
+      symbol = line.substring(1, length-2); //takes out parenthesis
     }//label
     return symbol;
   }//get symbol
