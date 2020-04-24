@@ -25,7 +25,7 @@ class Parser {
         hasNextLine = false;
       }//line null
       
-      cleanComments();
+      //cleanComments();
       
       if (line.length()>0 && hasNextLine == true) {
         //commandType();//determines command type
@@ -34,9 +34,11 @@ class Parser {
 
     catch(IOException e) {
       e.printStackTrace();
-      hasNextLine = false;
+      line = null;
+      //hasNextLine = false;
     }//catch 
    // println(line + " --> " + type + " --> " + getSymbol());
+   println(line);
   }//end read file
 
   void cleanComments() {//take out comments
