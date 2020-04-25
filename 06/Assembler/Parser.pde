@@ -6,15 +6,15 @@ class Parser {
   BufferedReader reader;
   StringList line;
   StringList typeList;
-  String comp, dest, jump;
+  StringList comp, dest, jump;
 
   Parser(String file) {
     reader = createReader(file); //create reader file
     line = new StringList(); //create stringlist
     typeList = new StringList();
-    comp = "";
-    dest = "";
-    jump = "";
+    comp = new StringList();
+    dest = new StringList();
+    jump = new StringList();
   }//constructor
 
   void readFile() {
@@ -36,7 +36,8 @@ class Parser {
     cleanComments();
     for (int i = 0; i < line.size()-1; i++) {
       typeList.set(i, commandType(i));//determines command type
-      println(line.get(i) + " --> " + typeList.get(i) + " --> " + getSymbol(i));
+      cInstruction(i);
+      //println(line.get(i) + " --> " + typeList.get(i) + " --> " + getSymbol(i));
     }//for line loop
     println("-------------------------");//line break
   }//end analyze file
@@ -45,7 +46,7 @@ class Parser {
     //take out comments
     for (int i = 0; i < line.size()-1; i++) {
       if (line.get(i).contains("//")) {
-        String[] tempStr = new String[10];
+        String[] tempStr = new String[3];
         tempStr = line.get(i).split("//"); //splits comment
         tempStr[1] = ""; //replaces the comment part with an empty string
         line.set(i, tempStr[0]); //makes it into a string
@@ -83,32 +84,40 @@ class Parser {
     return symbol;
   }//get symbol
 
-  /*
-c instruction to do:
-   -if it's a c instruction 
-   
-   -if it contains the = symbol
-   -->if it doesn't have the = symbol, then dest = null and 
-   -->if it has = then it'll divide into dest and comp
-   
-   -if it contains the ; symbbol
-   -->if it doesn't then jump is null
-   -->if it does, it'll split into comp and jump
-   */
   void cInstruction(int i) {
+    //i is in the index number
+    //only comp/dest or comp/jump
+
+    String[] tempStr = new String[3];
+
     if (typeList.get(i) == "c") {
+      println(line.get(i));
+      if (typeList.get(i).contains("=")==true) { //dest = comp
+        println("=");
+        tempStr = line.get(i).split("=");
+        dest.set(i, tempStr[0]);
+        comp.set(i, tempStr[1]);
+        println("Split " + tempStr[0] + " " + tempStr[1]);
+      }//comp + dest
+
+      else if (typeList.get(i).contains(";")==true) {//comp;jump
+        tempStr = line.get(i).split(";");
+        comp.set(i, tempStr[0]);
+        jump.set(i, tempStr[1]);
+        println(tempStr[0] + " " + tempStr[1]);
+      }//comp + jump
     }//if it's a c instruction
   }//c instruction
 
-  String dest() {
+  StringList dest() {
     return dest;
   }//dest
 
-  String comp() {
+  StringList comp() {
     return comp;
   }//comp
 
-  String jump() {
+  StringList jump() {
     return jump;
   }//jump
 }//class definition
