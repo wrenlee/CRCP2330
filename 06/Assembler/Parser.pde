@@ -92,19 +92,18 @@ class Parser {
 
     if (typeList.get(i) == "c") {
       println(line.get(i));
-      if (typeList.get(i).contains("=")==true) { //dest = comp
-        println("=");
+      if (line.get(i).contains("=")==true) { //dest = comp
         tempStr = line.get(i).split("=");
         dest.set(i, tempStr[0]);
         comp.set(i, tempStr[1]);
-        println("Split " + tempStr[0] + " " + tempStr[1]);
+        //println("Dest " + dest.get(i) + " " + comp.get(i));
       }//comp + dest
 
-      else if (typeList.get(i).contains(";")==true) {//comp;jump
+      else if (line.get(i).contains(";")==true) {//comp;jump
         tempStr = line.get(i).split(";");
         comp.set(i, tempStr[0]);
         jump.set(i, tempStr[1]);
-        println(tempStr[0] + " " + tempStr[1]);
+        //println("Jump " + comp.get(i) + " " + jump.get(i));
       }//comp + jump
     }//if it's a c instruction
   }//c instruction

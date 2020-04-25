@@ -6,9 +6,17 @@ String file;
 
 Parser p;
 
+StringList allComp;
+StringList allDest;
+StringList allJump;
+
 void setup() {
   file = "MaxL";
   file = file + ".asm"; //creates file
+  
+  allComp = new StringList();
+  allDest = new StringList();
+  allJump = new StringList();
   
   p = new Parser(file);
 }//end setup
