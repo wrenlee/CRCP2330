@@ -24,9 +24,9 @@ class Parser {
     catch(IOException e) {
       e.printStackTrace();
     }//catch
-    
+
     for (int i = 0; i < line.size(); i++) {
-      if (line.get(i) == null) {    
+      if (line.get(i) == null) {   
         noLoop(); //stop loop if out of text
       }//if null stop
     }//for loop
@@ -34,10 +34,11 @@ class Parser {
 
   void analyzeFile() {
     cleanComments();
-    for (int i = 0; i < line.size(); i++) {
-      //  typeList.set(i, commandType(i));//determines command type
-      //println(line.get(index-1) + " --> " + type + " --> " + getSymbol(i));
+    for (int i = 0; i < line.size()-1; i++) {
+      typeList.set(i, commandType(i));//determines command type
+      println(line.get(i) + " --> " + typeList.get(i) + " --> " + getSymbol(i));
     }//for line loop
+    println("-------------------------");//line break
   }//end analyze file
 
   void cleanComments() {
@@ -46,16 +47,18 @@ class Parser {
       if (line.get(i).contains("//")) {
         String[] tempStr = new String[10];
         tempStr = line.get(i).split("//"); //splits comment
-        //println("Temp before " + tempStr[0] + " + " + tempStr[1]);
         tempStr[1] = ""; //replaces the comment part with an empty string
-        //println("Temp after " + tempStr[0] + " + " + tempStr[1]);
         line.set(i, tempStr[0]); //makes it into a string
-      }//comments
+        line.remove(i); //remove line
+      }//if comments
+      if (line.get(i).isEmpty() == true) {//if it's empty
+        line.remove(i);
+      }//empty space
     }//for loop
   }//clean line end
 
   String commandType(int i) {
-    String type;
+    String type = "";
     if (line.get(i).contains("@")) {
       type = "a";
     }//a instruction
