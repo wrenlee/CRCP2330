@@ -46,16 +46,26 @@ class Code {
       }//if c instruction
     }//for loop
 
-    //checkCode();
+    checkCode();
     println("-------------------------");//line break
   }//decode 
 
   void aToBinary(int i) {
-    // println(aInstruct.get(i) + ".");
-    //println(Integer.parseInt("0"));
     int aTemp = Integer.parseInt(aInstruct.get(i)); //convert string to number
-    aBinary.set(i, Integer.toBinaryString(aTemp)); //convert number to binary string
-    //println(aInstruct.get(i) + " -> " + aBinary.get(i));
+    String aBin = "";
+    aBin = Integer.toBinaryString(aTemp); //convert number to binary string
+    
+    String zeros = ""; 
+    if(aBin.length()<16){
+      for(int z = aBin.length(); z < 16; z++){
+        zeros = zeros + "0"; //add zeros
+      }//loop through and add enough zeros
+    }//if it's not 16 long
+    
+    zeros = zeros + aBin; //add binary value and zeros
+    aBinary.set(i, zeros); //adds value to a binary arraylist
+    
+    //println(aInstruct.get(i) + " -> " + aBinary.get(i) + " size " + aBinary.get(i).length());
   }//a to binary
 
   void cToBinary(int i) {
@@ -229,9 +239,9 @@ class Code {
     }//D|A D|M
     //end of comp
     
-    for(int j = 0; j <= 9; j++){
-    println(i + " " + j + " " + cTemp.get(j));
-    }//testing comp part
+    //for(int j = 0; j <= 9; j++){
+    //println(i + " " + j + " " + cTemp.get(j));
+    //}//testing comp part
 
     //begin of dest
     String destTemp = ""; //holds dest
@@ -312,10 +322,15 @@ class Code {
       cTemp.set(15, 1);
     }//JMP
     //end jump
+    
+    //for(int j = 0; j < cTemp.size(); j++){
+    //  println(i + " " + j + " " + cTemp.get(j));
+    //}
 
     String cStrTemp = ""; //empty temp string
     for (int k = 0; k < cTemp.size(); k++) {
-      cStrTemp = cStrTemp + cTemp.get(i);
+      cStrTemp = cStrTemp + cTemp.get(k);
+      //println(k + " Binary " + cStrTemp);
     }//loop through temp and add to temp string
 
     //println("c instruction " + cStrTemp);
@@ -331,7 +346,7 @@ class Code {
         println("A: " + aBinary.get(i));
       }//a
       else if (typeList.get(i).equals("c")) {
-        println("C: " + cBinary.get(i) + " " + cBinary.get(i).length());
+        println("C: " + cBinary.get(i));
       }//c
     }//for loop type list
     println("-------------------------");//line break
