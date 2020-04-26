@@ -7,6 +7,7 @@ class Parser {
   StringList line;
   StringList typeList;
   StringList comp, dest, jump;
+  StringList aInstruct;
 
   Parser(String file) {
     reader = createReader(file); //create reader file
@@ -15,6 +16,7 @@ class Parser {
     comp = new StringList();
     dest = new StringList();
     jump = new StringList();
+    aInstruct = new StringList();
   }//constructor
 
   void readFile() {
@@ -39,7 +41,7 @@ class Parser {
       cInstruction(i);
       //println(line.get(i) + " --> " + typeList.get(i) + " --> " + getSymbol(i));
     }//for line loop
-    println("-------------------------");//line break
+    //println("-------------------------");//line break
   }//end analyze file
 
   void cleanComments() {
@@ -77,6 +79,7 @@ class Parser {
     int length = line.get(i).length();
     if (typeList.get(i) == "a") {
       symbol = line.get(i).substring(1, length);//takes out the @ symbol
+      aInstruct.set(i, symbol);
     }//a instruction
     else if (typeList.get(i) == "l") {
       symbol = line.get(i).substring(1, length-1); //takes out parenthesis
@@ -91,12 +94,12 @@ class Parser {
     String[] tempStr = new String[3];
 
     if (typeList.get(i) == "c") {
-      println(line.get(i));
+      //println(line.get(i));
       if (line.get(i).contains("=")==true) { //dest = comp
         tempStr = line.get(i).split("=");
         dest.set(i, tempStr[0]);
         comp.set(i, tempStr[1]);
-        //println("Dest " + dest.get(i) + " " + comp.get(i));
+        //println("Dest " + i + " " + dest.get(i) + " " + comp.get(i));
       }//comp + dest
 
       else if (line.get(i).contains(";")==true) {//comp;jump
@@ -119,4 +122,12 @@ class Parser {
   StringList jump() {
     return jump;
   }//jump
+
+  StringList types() {
+    return typeList;
+  }//types
+
+  StringList aInstruct() {
+    return aInstruct;
+  }//a instruct
 }//class definition

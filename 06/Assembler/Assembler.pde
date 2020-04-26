@@ -5,23 +5,40 @@
 String file;
 
 Parser p;
+Code c;
 
 StringList allComp;
 StringList allDest;
 StringList allJump;
+StringList allTypes;
+StringList allA;
 
 void setup() {
   file = "MaxL";
   file = file + ".asm"; //creates file
-  
+
+  p = new Parser(file);
+  c = new Code();
+
+  //init stringlists
   allComp = new StringList();
   allDest = new StringList();
   allJump = new StringList();
-  
-  p = new Parser(file);
+  allTypes = new StringList();
+  allA = new StringList();
 }//end setup
 
 void draw() {
   p.readFile(); //adds strings to string list
-  p.analyzeFile();
+  p.analyzeFile(); //takes out comments, analyzes a/label/c, determine comp/dest/jump
+
+  //gets types, comp, dest, jump
+  allDest = p.dest();
+  allComp = p.comp();
+  allJump = p.jump();
+  allTypes = p.types();
+  allA = p.aInstruct();
+  
+  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
+  c.decode();
 }//end draw
