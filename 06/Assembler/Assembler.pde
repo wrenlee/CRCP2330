@@ -28,6 +28,15 @@ void setup() {
   allA = new StringList();
 }//end setup
 
+void initCode() {
+  //gets types, comp, dest, jump
+  allDest = p.dest();
+  allComp = p.comp();
+  allJump = p.jump();
+  allTypes = p.types();
+  allA = p.aInstruct();
+}//init code
+
 void draw() {
   p.readFile(); //adds strings to string list
   p.analyzeFile(); //takes out comments, analyzes a/label/c, determine comp/dest/jump
@@ -37,12 +46,3 @@ void draw() {
   c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
   c.decode();
 }//end draw
-
-void initCode() {
-  //gets types, comp, dest, jump
-  allDest = p.dest();
-  allComp = p.comp();
-  allJump = p.jump();
-  allTypes = p.types();
-  allA = p.aInstruct();
-}//init code
