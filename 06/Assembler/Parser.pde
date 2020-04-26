@@ -41,6 +41,7 @@ class Parser {
       cInstruction(i);
       getSymbol(i);
       //println(i + " " + line.get(i) + " --> " + typeList.get(i));
+      //println(i + " " + line.get(i));
     }//for line loop
     //println("-------------------------");//line break
   }//end analyze file

@@ -33,7 +33,6 @@ class Code {
     dest = allD;
     jump = allJ;
     aInstruct = allA;
-
   }//initialize
 
   void decode() {
@@ -47,11 +46,12 @@ class Code {
       }//if c instruction
     }//for loop
 
-    checkCode();
+    //checkCode();
+    println("-------------------------");//line break
   }//decode 
 
   void aToBinary(int i) {
-    println(aInstruct.get(i) + ".");
+    // println(aInstruct.get(i) + ".");
     //println(Integer.parseInt("0"));
     int aTemp = Integer.parseInt(aInstruct.get(i)); //convert string to number
     aBinary.set(i, Integer.toBinaryString(aTemp)); //convert number to binary string
@@ -65,28 +65,12 @@ class Code {
     IntList cTemp = new IntList(); //c instruction but in binary
     String compTemp = comp.get(i); //holds comp
 
-    String destTemp = ""; //holds dest
-    if (dest.get(i).equals("0")) {
-      cTemp.set(10, 0);
-      cTemp.set(11, 0);
-      cTemp.set(12, 0);
-    }//dest is empty
-    else {
-      destTemp = dest.get(i);
-    }//if dest has something
-
-    String jumpTemp = ""; //holds jump
-    if (jump.get(i).equals("0")) {
-      cTemp.set(13, 0);
-      cTemp.set(14, 0);
-      cTemp.set(15, 0);
-    }//jump is empty
-    else {
-      jumpTemp = jump.get(i);
-    }//if jump has something
+    //println(i + " dest " + dest.get(i) + " comp " + comp.get(i) + " jump " + jump.get(i));
 
     for (int j = 0; j < 3; j++) {
-      cTemp.append(1);
+      cTemp.set(0, 1);
+      cTemp.set(1, 1);
+      cTemp.set(2, 1);
     }//adds first 3 1s
 
     //comp part
@@ -244,8 +228,22 @@ class Code {
       cTemp.set(9, 1);
     }//D|A D|M
     //end of comp
+    
+    for(int j = 0; j <= 9; j++){
+    println(i + " " + j + " " + cTemp.get(j));
+    }//testing comp part
 
     //begin of dest
+    String destTemp = ""; //holds dest
+    if (dest.get(i).equals("0")) {
+      cTemp.set(10, 0);
+      cTemp.set(11, 0);
+      cTemp.set(12, 0);
+    }//dest is empty
+    else {
+      destTemp = dest.get(i);
+    }//if dest has something
+
     if (destTemp.contains("M")) {
       cTemp.set(12, 1);
     }//M
@@ -269,6 +267,15 @@ class Code {
     //end of dest
 
     //begin jump
+    String jumpTemp = ""; //holds jump
+    if (jump.get(i).equals("0")) {
+      cTemp.set(13, 0);
+      cTemp.set(14, 0);
+      cTemp.set(15, 0);
+    }//jump is empty
+    else {
+      jumpTemp = jump.get(i);
+    }//if jump has something
     if (jumpTemp.equals("JGT")) {
       cTemp.set(13, 0);
       cTemp.set(14, 0);
@@ -314,6 +321,7 @@ class Code {
     //println("c instruction " + cStrTemp);
 
     cBinary.set(i, cStrTemp); //adds temp string of binary c to c binary stringlist
+    //println(i + " Binary " + cStrTemp);
   }//c to binary
 
   void checkCode() {
@@ -323,8 +331,9 @@ class Code {
         println("A: " + aBinary.get(i));
       }//a
       else if (typeList.get(i).equals("c")) {
-          println("C: " + cBinary.get(i));
-        }//c
-      }//for loop type list
-    }//check code
-  }//class definition end
+        println("C: " + cBinary.get(i) + " " + cBinary.get(i).length());
+      }//c
+    }//for loop type list
+    println("-------------------------");//line break
+  }//check code
+}//class definition end
