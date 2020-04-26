@@ -40,7 +40,7 @@ class Parser {
       typeList.set(i, commandType(i));//determines command type
       cInstruction(i);
       getSymbol(i);
-      //println(line.get(i) + " --> " + typeList.get(i) + " --> " + getSymbol(i));
+      //println(i + " " + line.get(i) + " --> " + typeList.get(i));
     }//for line loop
     //println("-------------------------");//line break
   }//end analyze file
@@ -49,11 +49,13 @@ class Parser {
     //take out comments
     for (int i = 0; i < line.size()-1; i++) {
       if (line.get(i).contains("//")) {
-        String[] tempStr = new String[3];
+        String[] tempStr = new String[2];
         tempStr = line.get(i).split("//"); //splits comment
-        tempStr[1] = ""; //replaces the comment part with an empty string
-        line.set(i, tempStr[0]); //makes it into a string
-        line.remove(i); //remove line
+        String str = tempStr[0];
+        //println("pre trim " + str + ".");
+        str = str.trim();
+        //println("post trim " + str + ".");
+        line.set(i, str); //makes it into a string
       }//if comments
       if (line.get(i).isEmpty() == true) {//if it's empty
         line.remove(i);
@@ -81,9 +83,15 @@ class Parser {
     if (typeList.get(i) == "a") {
       symbol = line.get(i).substring(1, length);//takes out the @ symbol
       aInstruct.set(i, symbol);
+      comp.set(i, "0");
+      dest.set(i, "0");
+      jump.set(i, "0");
     }//a instruction
     else if (typeList.get(i) == "l") {
       symbol = line.get(i).substring(1, length-1); //takes out parenthesis
+      comp.set(i, "0");
+      dest.set(i, "0");
+      jump.set(i, "0");
     }//label
   }//get symbol
 
@@ -94,20 +102,26 @@ class Parser {
     String[] tempStr = new String[3];
 
     if (typeList.get(i) == "c") {
-      //println(line.get(i));
+      //println(i + " " + line.get(i));
       if (line.get(i).contains("=")==true) { //dest = comp
         tempStr = line.get(i).split("=");
         dest.set(i, tempStr[0]);
         comp.set(i, tempStr[1]);
         //println("Dest " + dest.get(i) + " comp " + comp.get(i));
       }//comp + dest
+      else {
+        dest.set(i, "0");
+      }//if there is no dest
 
-      else if (line.get(i).contains(";")==true) {//comp;jump
+      if (line.get(i).contains(";")==true) {//comp;jump
         tempStr = line.get(i).split(";");
         comp.set(i, tempStr[0]);
         jump.set(i, tempStr[1]);
         //println("Comp " + comp.get(i) + " jump " + jump.get(i));
       }//comp + jump
+      else {
+        jump.set(i, "0");
+      }//if there is no jump
     }//if it's a c instruction
   }//c instruction
 

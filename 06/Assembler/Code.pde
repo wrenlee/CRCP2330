@@ -33,6 +33,7 @@ class Code {
     dest = allD;
     jump = allJ;
     aInstruct = allA;
+
   }//initialize
 
   void decode() {
@@ -42,18 +43,16 @@ class Code {
       }//if a instruction
 
       if (typeList.get(i) == "c") {
-        //cToBinary(i);
+        cToBinary(i);
       }//if c instruction
     }//for loop
 
-    for(int i = 0; i < jump.size(); i++){
-      println(i + " " + jump.get(i));
-    }
-
-    //checkCode();
-  }//decode
+    checkCode();
+  }//decode 
 
   void aToBinary(int i) {
+    println(aInstruct.get(i) + ".");
+    //println(Integer.parseInt("0"));
     int aTemp = Integer.parseInt(aInstruct.get(i)); //convert string to number
     aBinary.set(i, Integer.toBinaryString(aTemp)); //convert number to binary string
     //println(aInstruct.get(i) + " -> " + aBinary.get(i));
@@ -67,7 +66,7 @@ class Code {
     String compTemp = comp.get(i); //holds comp
 
     String destTemp = ""; //holds dest
-    if (dest.get(i)==null) {
+    if (dest.get(i).equals("0")) {
       cTemp.set(10, 0);
       cTemp.set(11, 0);
       cTemp.set(12, 0);
@@ -77,7 +76,7 @@ class Code {
     }//if dest has something
 
     String jumpTemp = ""; //holds jump
-    if (jump.get(i)==null) {
+    if (jump.get(i).equals("0")) {
       cTemp.set(13, 0);
       cTemp.set(14, 0);
       cTemp.set(15, 0);
@@ -91,12 +90,14 @@ class Code {
     }//adds first 3 1s
 
     //comp part
-    if (typeList.get(i-1) == "a") {
-      cTemp.set(3, 1);
-    }//if a is 1
-    else {
-      cTemp.set(3, 0);
-    }//if a is 0
+    if (i > 0) {
+      if (typeList.get(i-1) == "a") {
+        cTemp.set(3, 1);
+      }//if a is 1
+      else {
+        cTemp.set(3, 0);
+      }//if a is 0
+    }// i > 0
 
     if (compTemp.equals("0")) {
       cTemp.set(4, 1);
@@ -317,8 +318,13 @@ class Code {
 
   void checkCode() {
     for (int i = 0; i < typeList.size(); i++) {
-      println("C: " + cBinary.get(i));
-      println("A: " + aBinary.get(i));
-    }//for loop type list
-  }//check code
-}//class definition end
+      print(i + " ");
+      if (typeList.get(i).equals("a")) {
+        println("A: " + aBinary.get(i));
+      }//a
+      else if (typeList.get(i).equals("c")) {
+          println("C: " + cBinary.get(i));
+        }//c
+      }//for loop type list
+    }//check code
+  }//class definition end
