@@ -39,6 +39,7 @@ class Parser {
     for (int i = 0; i < line.size()-1; i++) {
       typeList.set(i, commandType(i));//determines command type
       cInstruction(i);
+      getSymbol(i);
       //println(line.get(i) + " --> " + typeList.get(i) + " --> " + getSymbol(i));
     }//for line loop
     //println("-------------------------");//line break
@@ -74,7 +75,7 @@ class Parser {
     return type;
   }//command type
 
-  String getSymbol(int i) {
+  void getSymbol(int i) {
     String symbol = ""; //empty symbol
     int length = line.get(i).length();
     if (typeList.get(i) == "a") {
@@ -84,7 +85,6 @@ class Parser {
     else if (typeList.get(i) == "l") {
       symbol = line.get(i).substring(1, length-1); //takes out parenthesis
     }//label
-    return symbol;
   }//get symbol
 
   void cInstruction(int i) {
@@ -99,14 +99,14 @@ class Parser {
         tempStr = line.get(i).split("=");
         dest.set(i, tempStr[0]);
         comp.set(i, tempStr[1]);
-        //println("Dest " + i + " " + dest.get(i) + " " + comp.get(i));
+        //println("Dest " + dest.get(i) + " comp " + comp.get(i));
       }//comp + dest
 
       else if (line.get(i).contains(";")==true) {//comp;jump
         tempStr = line.get(i).split(";");
         comp.set(i, tempStr[0]);
         jump.set(i, tempStr[1]);
-        //println("Jump " + comp.get(i) + " " + jump.get(i));
+        //println("Comp " + comp.get(i) + " jump " + jump.get(i));
       }//comp + jump
     }//if it's a c instruction
   }//c instruction

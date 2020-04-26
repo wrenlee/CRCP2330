@@ -31,14 +31,18 @@ void setup() {
 void draw() {
   p.readFile(); //adds strings to string list
   p.analyzeFile(); //takes out comments, analyzes a/label/c, determine comp/dest/jump
+  
+  initCode();
 
+  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
+  c.decode();
+}//end draw
+
+void initCode() {
   //gets types, comp, dest, jump
   allDest = p.dest();
   allComp = p.comp();
   allJump = p.jump();
   allTypes = p.types();
   allA = p.aInstruct();
-  
-  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
-  c.decode();
-}//end draw
+}//init code
