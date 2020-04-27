@@ -8,6 +8,7 @@ class Parser {
   StringList typeList;
   StringList comp, dest, jump;
   StringList aInstruct;
+  StringList labels;
 
   Parser(String file) {
     reader = createReader(file); //create reader file
@@ -17,6 +18,7 @@ class Parser {
     dest = new StringList();
     jump = new StringList();
     aInstruct = new StringList();
+    labels = new StringList();
   }//constructor
 
   void readFile() {
@@ -90,6 +92,7 @@ class Parser {
     }//a instruction
     else if (typeList.get(i) == "l") {
       symbol = line.get(i).substring(1, length-1); //takes out parenthesis
+      labels.sey(i, symbol);
       comp.set(i, "0");
       dest.set(i, "0");
       jump.set(i, "0");
