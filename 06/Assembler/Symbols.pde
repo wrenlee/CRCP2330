@@ -26,6 +26,7 @@ class Symbols{
     lines = allLines; //gets all of the lines
     types = allTypes; //gets all of the types
     
+    println(types);
   }//first pass
   
   void predefinedSymbols(){ //add of the 23 predefined symbols

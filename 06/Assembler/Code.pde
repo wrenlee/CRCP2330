@@ -54,17 +54,17 @@ class Code {
     int aTemp = Integer.parseInt(aInstruct.get(i)); //convert string to number
     String aBin = "";
     aBin = Integer.toBinaryString(aTemp); //convert number to binary string
-    
+
     String zeros = ""; 
-    if(aBin.length()<16){
-      for(int z = aBin.length(); z < 16; z++){
+    if (aBin.length()<16) {
+      for (int z = aBin.length(); z < 16; z++) {
         zeros = zeros + "0"; //add zeros
       }//loop through and add enough zeros
     }//if it's not 16 long
-    
+
     zeros = zeros + aBin; //add binary value and zeros
     aBinary.set(i, zeros); //adds value to a binary arraylist
-    
+
     //println(aInstruct.get(i) + " -> " + aBinary.get(i) + " size " + aBinary.get(i).length());
   }//a to binary
 
@@ -238,7 +238,7 @@ class Code {
       cTemp.set(9, 1);
     }//D|A D|M
     //end of comp
-    
+
     //for(int j = 0; j <= 9; j++){
     //println(i + " " + j + " " + cTemp.get(j));
     //}//testing comp part
@@ -322,7 +322,7 @@ class Code {
       cTemp.set(15, 1);
     }//JMP
     //end jump
-    
+
     //for(int j = 0; j < cTemp.size(); j++){
     //  println(i + " " + j + " " + cTemp.get(j));
     //}
@@ -338,6 +338,19 @@ class Code {
     cBinary.set(i, cStrTemp); //adds temp string of binary c to c binary stringlist
     //println(i + " Binary " + cStrTemp);
   }//c to binary
+
+  StringList export() {
+    StringList allBinary = new StringList();
+    for (int i = 0; i < typeList.size(); i++) {
+      if (typeList.get(i).equals("a")) {
+        allBinary.set(i, aBinary.get(i));
+      }//a
+      else if (typeList.get(i).equals("c")) {
+        allBinary.set, cBinary.get(i));
+      }//c
+    }//for loop
+    return allBinary;
+  }//exportx
 
   void checkCode() {
     for (int i = 0; i < typeList.size(); i++) {
