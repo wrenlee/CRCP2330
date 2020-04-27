@@ -3,23 +3,28 @@ class Symbols{
   StringList addresses;
   
   StringList lines;
+  StringList types;
   
-  Symbols(){//creates table
+  Symbols(){
+    //creates table
     symbols = new StringList();
     addresses = new StringList();
     
+    //stringlists
     lines = new StringList();
+    types = new StringList();
   }//symbols constructor
   
   /*
   one stringlist has symbols. 
-  Check if the symbol is in there and return the index of that symbol 
-  to use in the address stringlist then return the binary number of that
+  Check if the symbol is in there and 
+  return the index of that symbol to use in the address stringlist 
+  then return the binary number of the address
   */
   
-  void firstPass(StringList allLines){
+  void firstPass(StringList allLines, StringList allTypes){
     lines = allLines; //gets all of the lines
-    
+    types = allTypes; //gets all of the types
     
   }//first pass
   
