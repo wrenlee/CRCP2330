@@ -41,7 +41,7 @@ class Parser {
     for (int i = 0; i < line.size()-1; i++) {
       typeList.set(i, commandType(i));//determines command type
       cInstruction(i);
-      getSymbol(i);
+      symbols(i);
       //println(i + " " + line.get(i) + " --> " + typeList.get(i));
       //println(i + " " + line.get(i));
     }//for line loop
@@ -80,7 +80,7 @@ class Parser {
     return type;
   }//command type
 
-  void getSymbol(int i) {
+  void symbols(int i) {
     String symbol = ""; //empty symbol
     int length = line.get(i).length();
     if (typeList.get(i) == "a") {

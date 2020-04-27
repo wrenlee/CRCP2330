@@ -94,15 +94,6 @@ class Code {
         cTemp.set(3, 0);
       }//a = 0 w/o m
     }// i > 0
-    
-    // if (i > 0) {
-    //  if ((typeList.get(i-1) == "a") && (jump.get(i).isEmpty()==true)) {
-    //    cTemp.set(3, 1);
-    //  }//if a is 1
-    //  else {
-    //    cTemp.set(3, 0);
-    //  }//if a is 0
-    //}// i > 0
 
     if (compTemp.equals("0")) {
       cTemp.set(4, 1);

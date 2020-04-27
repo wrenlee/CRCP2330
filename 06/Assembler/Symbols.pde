@@ -5,6 +5,8 @@ class Symbols{
   StringList lines;
   StringList types;
   
+  int lastCell;
+  
   Symbols(){
     //creates table
     symbols = new StringList();
@@ -13,6 +15,8 @@ class Symbols{
     //stringlists
     lines = new StringList();
     types = new StringList();
+    
+    lastCell = 16; //variables start adding at 16
   }//symbols constructor
   
   /*
@@ -22,12 +26,43 @@ class Symbols{
   then return the binary number of the address
   */
   
-  void firstPass(StringList allLines, StringList allTypes){
-    lines = allLines; //gets all of the lines
-    types = allTypes; //gets all of the types
+  boolean hasSymbol(String symb){
+    boolean hasSymb;
+    if(symbols.hasValue(symb)==true){
+       hasSymb = true;
+    }//if the symbol is in table
+    else{
+      hasSymb = false;
+    }//if symbol isn't in table
+    return hasSymb;
+  }//has symbol, returns t/f value
+  
+  String getAddress(String oldStr){
+    String newAdd = ""; //new address
+    int slotNum = 0;
+    for(int i = 0; i < symbols.size(); i++){
+      if(symbols.get(i).equals(oldStr) == true){
+        slotNum = i; //sets slot num
+      }//if string then get slot num
+      newAdd = addresses.get(slotNum);//gets the address from the symbols table
+    }//loop through symbols list
+    return newAdd;
+  }//get address
+
+  void addSymbol(String name){
+    symbols.set(lastCell, name); //adds variable at the last place
     
-    println(types);
-  }//first pass
+    String lc = Integer.toString(lastCell);
+    addresses.set(lastCell, lc); //adds last cell number to addresses
+    lastCell++; //advances last cel
+  }//add variables
+  
+  void addSymbol(String name, int loc){
+    symbols.append(name); //add name to end of symbols table
+    
+    String index = Integer.toString(loc);
+    addresses.append(index); //add address
+  }//add symbol
   
   void predefinedSymbols(){ //add of the 23 predefined symbols
     symbols.append("R0");
