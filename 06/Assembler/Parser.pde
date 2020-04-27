@@ -92,7 +92,7 @@ class Parser {
     }//a instruction
     else if (typeList.get(i) == "l") {
       symbol = line.get(i).substring(1, length-1); //takes out parenthesis
-      labels.sey(i, symbol);
+      labels.set(i, symbol);
       comp.set(i, "0");
       dest.set(i, "0");
       jump.set(i, "0");
@@ -148,4 +148,8 @@ class Parser {
   StringList aInstruct() {
     return aInstruct;
   }//a instruct
+  
+  StringList lines(){
+    return line;
+  }//returns all lines w/ comments cleaned out
 }//class definition

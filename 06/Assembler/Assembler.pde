@@ -6,12 +6,14 @@ String file;
 
 Parser p;
 Code c;
+Symbols s;
 
 StringList allComp;
 StringList allDest;
 StringList allJump;
 StringList allTypes;
 StringList allA;
+StringList allLines;
 
 void setup() {
   file = "MaxL";
@@ -19,6 +21,7 @@ void setup() {
 
   p = new Parser(file);
   c = new Code();
+  s = new Symbols();
 
   //init stringlists
   allComp = new StringList();
@@ -26,22 +29,27 @@ void setup() {
   allJump = new StringList();
   allTypes = new StringList();
   allA = new StringList();
+  allLines = new StringList();
 }//end setup
 
-void initCode() {
+void initStrings() {
   //gets types, comp, dest, jump
   allDest = p.dest();
   allComp = p.comp();
   allJump = p.jump();
   allTypes = p.types();
   allA = p.aInstruct();
-}//init code
+  allLines = p.lines();
+}//init strings
 
 void draw() {
   p.readFile(); //adds strings to string list
   p.analyzeFile(); //takes out comments, analyzes a/label/c, determine comp/dest/jump
-  
-  initCode();
+
+  initStrings(); //initializes all of the stringlists
+
+  s.predefinedSymbols(); //predefined symbols
+  s.firstPass(allLines);
 
   c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
   c.decode();

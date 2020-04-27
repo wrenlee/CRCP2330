@@ -46,8 +46,8 @@ class Code {
       }//if c instruction
     }//for loop
 
-    checkCode();
-    println("-------------------------");//line break
+    //checkCode();
+    //println("-------------------------");//line break
   }//decode 
 
   void aToBinary(int i) {
