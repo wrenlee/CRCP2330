@@ -21,7 +21,7 @@ StringList allA;
 StringList allLines;
 
 void setup() {
-  file = "MaxL"; //STEP 1: NAME YOUR FILE
+  file = "Max"; //STEP 1: NAME YOUR FILE
   fileAsm = file + ".asm"; //creates file
 
   p = new Parser(fileAsm);
@@ -77,5 +77,5 @@ void writeToFile() {
 
   writer.flush(); 
   writer.close();
-  println("File published!");
+  println(finalFile + " is published!");
 }//write to file

@@ -83,15 +83,26 @@ class Code {
       cTemp.set(2, 1);
     }//adds first 3 1s
 
-    //comp part
+    //begin comp
+    
+    //a, 12
     if (i > 0) {
-      if (typeList.get(i-1) == "a") {
+      if (comp.get(i).contains("M")) {
         cTemp.set(3, 1);
-      }//if a is 1
+      }//a = 1 w/ m
       else {
         cTemp.set(3, 0);
-      }//if a is 0
+      }//a = 0 w/o m
     }// i > 0
+    
+    // if (i > 0) {
+    //  if ((typeList.get(i-1) == "a") && (jump.get(i).isEmpty()==true)) {
+    //    cTemp.set(3, 1);
+    //  }//if a is 1
+    //  else {
+    //    cTemp.set(3, 0);
+    //  }//if a is 0
+    //}// i > 0
 
     if (compTemp.equals("0")) {
       cTemp.set(4, 1);
@@ -346,7 +357,7 @@ class Code {
         allBinary.set(i, aBinary.get(i));
       }//a
       else if (typeList.get(i).equals("c")) {
-        allBinary.set, cBinary.get(i));
+        allBinary.set(i, cBinary.get(i));
       }//c
     }//for loop
     return allBinary;
