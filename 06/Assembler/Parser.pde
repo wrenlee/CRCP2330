@@ -39,13 +39,17 @@ class Parser {
   void analyzeFile() {
     cleanComments();
     for (int i = 0; i < line.size()-1; i++) {
+      String tempLine = line.get(i);
+      String trimString = tempLine.trim(); //trims excess white space
+      line.set(i, trimString);
+      
       typeList.set(i, commandType(i));//determines command type
       cInstruction(i);
       symbols(i);
       //println(i + " " + line.get(i) + " --> " + typeList.get(i));
       //println(i + " " + line.get(i));
     }//for line loop
-    //println("-------------------------");//line break
+   // println("-------------------------");//line break
   }//end analyze file
 
   void cleanComments() {
@@ -93,6 +97,7 @@ class Parser {
     else if (typeList.get(i) == "l") {
       symbol = line.get(i).substring(1, length-1); //takes out parenthesis
       labels.set(i, symbol);
+      //println(symbol);
       comp.set(i, "0");
       dest.set(i, "0");
       jump.set(i, "0");
@@ -152,4 +157,8 @@ class Parser {
   StringList lines() {
     return line;
   }//returns all lines w/ comments cleaned out
+  
+  StringList labels(){
+    return labels;
+  }//returns all labels w/o parenthesis
 }//class definition

@@ -19,6 +19,7 @@ StringList allJump;
 StringList allTypes;
 StringList allA;
 StringList allLines;
+StringList allLabels;
 
 void setup() {
   file = "Max"; //STEP 1: NAME YOUR FILE
@@ -35,6 +36,7 @@ void setup() {
   allTypes = new StringList();
   allA = new StringList();
   allLines = new StringList();
+  allLabels = new StringList();
 }//end setup
 
 void initStrings() {
@@ -45,6 +47,7 @@ void initStrings() {
   allTypes = p.types();
   allA = p.aInstruct();
   allLines = p.lines();
+  allLabels = p.labels();
 }//init strings
 
 void draw() {
@@ -52,16 +55,13 @@ void draw() {
   p.analyzeFile(); //takes out comments, analyzes a/label/c, determine comp/dest/jump
 
   initStrings(); //initializes all of the stringlists
-  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
+  //  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
 
   s.predefinedSymbols(); //predefined symbols
 
-//for(int i = 0; i < allTypes.size(); i++){
-//  println(i + " " + allTypes.get(i));
-//}
-
-   firstPass();
-  //secondPass();
+  firstPass();
+  //s.printTable();
+  secondPass();
   //s.printTable();
 
   //writeToFile();
@@ -70,18 +70,18 @@ void draw() {
 void firstPass() {
   String labelName = ""; //label name
   //println(allTypes.size());
-  for (int i = 0; i < allLines.size(); i++) {
-    println(allTypes.get(i));
-   // if (allTypes.get(i).equals("l")) {
-      labelName = allLines.get(i); //get label name
-      println(labelName);
+  for (int i = 0; i < allTypes.size(); i++) {
+    //println(allTypes.get(i));
+    if (allTypes.get(i).equals("l")) {
+      labelName = allLabels.get(i); //get label name
+      //println(i + " " + labelName);
       s.addSymbol(labelName, i+1); //add label name and ROM address
-   // }//if it's a label
+    }//if it's a label
   }//loop through lines
 }//first pass
 
 void secondPass() {
-  for (int i = 0; i < allLines.size(); i++) {
+  for (int i = 0; i < allTypes.size(); i++) {
     if (allTypes.get(i) == "a") {
       if (s.hasSymbol(allLines.get(i)) == false) {
         s.addSymbol(allLines.get(i));//add symbol

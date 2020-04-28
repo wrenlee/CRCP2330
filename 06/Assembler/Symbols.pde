@@ -65,9 +65,8 @@ class Symbols {
   }//add symbol
   
   void printTable(){
-    println("Symbol   |  Address");
     for(int i = 0; i < symbols.size(); i++){
-      println(symbols.get(i) + " " + addresses.get(i));
+      println(symbols.get(i) + " | " + addresses.get(i));
     }//for loop
   }//print table
 
