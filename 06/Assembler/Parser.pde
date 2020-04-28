@@ -148,8 +148,8 @@ class Parser {
   StringList aInstruct() {
     return aInstruct;
   }//a instruct
-  
-  StringList lines(){
+
+  StringList lines() {
     return line;
   }//returns all lines w/ comments cleaned out
 }//class definition

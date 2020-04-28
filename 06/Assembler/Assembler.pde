@@ -56,19 +56,27 @@ void draw() {
 
   s.predefinedSymbols(); //predefined symbols
 
-  firstPass();
-  secondPass();
+//for(int i = 0; i < allTypes.size(); i++){
+//  println(i + " " + allTypes.get(i));
+//}
 
-  writeToFile();
+   firstPass();
+  //secondPass();
+  //s.printTable();
+
+  //writeToFile();
 }//end draw
 
 void firstPass() {
   String labelName = ""; //label name
+  //println(allTypes.size());
   for (int i = 0; i < allLines.size(); i++) {
-    if (allTypes.get(i) == "l") {
+    println(allTypes.get(i));
+   // if (allTypes.get(i).equals("l")) {
       labelName = allLines.get(i); //get label name
+      println(labelName);
       s.addSymbol(labelName, i+1); //add label name and ROM address
-    }//if it's a label
+   // }//if it's a label
   }//loop through lines
 }//first pass
 

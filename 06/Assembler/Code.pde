@@ -84,7 +84,7 @@ class Code {
     }//adds first 3 1s
 
     //begin comp
-    
+
     //a, 12
     if (i > 0) {
       if (comp.get(i).contains("M")) {
