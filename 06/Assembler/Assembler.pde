@@ -65,7 +65,7 @@ void draw() {
   //s.printTable();
   //println("--------------------");
   
-  code();
+  //code();
 
   //c.checkCode();
 
@@ -78,10 +78,10 @@ void firstPass() {
   for (int i = 0; i < allTypes.size(); i++) {
     //println(allTypes.get(i));
     // println(i);
-    if ((s.hasSymbol(allLines.get(i)) == false) && (allTypes.get(i).equals("l"))) {
+    if (allTypes.get(i).equals("l")) {
       //println("True");
       labelName = allLabels.get(i); //get label name
-      //println(i+1 + " " + labelName);
+      println(i+1 + " " + labelName);
       s.addSymbol(labelName, i+1); //add label name and ROM address
     }//if it's a label
   }//loop through lines
