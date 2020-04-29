@@ -64,7 +64,7 @@ void draw() {
   secondPass();
   //s.printTable();
 
-  c.checkCode();
+  //c.checkCode();
 
   //writeToFile();
 }//end draw
@@ -97,7 +97,7 @@ void secondPass() {
     }//if it's an a command
   }//for loop through all lines
 
-  //c.decode();
+  c.decode();
 }//second pass
 
 void writeToFile() {

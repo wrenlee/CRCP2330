@@ -48,6 +48,7 @@ class Code {
 
     //checkCode();
     //println("-------------------------");//line break
+    // println(aBinary.size());
   }//decode 
 
   void aToBinary(int i) {
