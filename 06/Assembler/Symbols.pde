@@ -29,9 +29,11 @@ class Symbols {
   boolean hasSymbol(String symb) {
     boolean hasSymb;
     if (symbols.hasValue(symb)==true) {
+      //println("True " + symb);
       hasSymb = true;
     }//if the symbol is in table
     else {
+      //println("False " + symb);
       hasSymb = false;
     }//if symbol isn't in table
     return hasSymb;
@@ -54,10 +56,10 @@ class Symbols {
   }//get address
 
   void addSymbol(String name) {
-    symbols.set(lastCell, name); //adds variable at the last place
+    symbols.append(name); //adds variable at the last place
 
     String lc = Integer.toString(lastCell);
-    addresses.set(lastCell, lc); //adds last cell number to addresses
+    addresses.append(lc); //adds last cell number to addresses
     lastCell++; //advances last cel
   }//add variables
 

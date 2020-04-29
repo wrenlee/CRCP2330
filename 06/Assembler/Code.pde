@@ -52,6 +52,7 @@ class Code {
   }//decode 
 
   void aToBinary(int i) {
+    println(aInstruct);
     int aTemp = Integer.parseInt(aInstruct.get(i)); //convert string to number
     String aBin = "";
     aBin = Integer.toBinaryString(aTemp); //convert number to binary string

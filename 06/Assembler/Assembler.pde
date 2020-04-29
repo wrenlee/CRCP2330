@@ -37,7 +37,7 @@ void setup() {
   allA = new StringList();
   allLines = new StringList();
   allLabels = new StringList();
-
+  
   s.predefinedSymbols(); //predefined symbols
 }//end setup
 
@@ -57,14 +57,15 @@ void draw() {
   p.analyzeFile(); //takes out comments, analyzes a/label/c, determine comp/dest/jump
 
   initStrings(); //initializes all of the stringlists
-  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
 
   //println(allLines);
   firstPass();
   //s.printTable();
   secondPass();
   //s.printTable();
-  println("--------------------");
+  //println("--------------------");
+  
+  code();
 
   //c.checkCode();
 
@@ -76,7 +77,7 @@ void firstPass() {
   //println(allTypes.size());
   for (int i = 0; i < allTypes.size(); i++) {
     //println(allTypes.get(i));
-   // println(i);
+    // println(i);
     if ((s.hasSymbol(allLines.get(i)) == false) && (allTypes.get(i).equals("l"))) {
       //println("True");
       labelName = allLabels.get(i); //get label name
@@ -94,18 +95,19 @@ void secondPass() {
         s.addSymbol(allA.get(i));//add symbol
       }//if the symbol isn't there
       else {
-        //println("Old " + allA.get(i));
+        // println("Old " + allA.get(i));
         String newAddress = s.getAddress(allA.get(i));
         allA.set(i, newAddress); //add symbol
-        //println("New add " + newAddress);
+        // println("New add " + newAddress);
       }//if the symbol is there
     }//if it's an a command
   }//for loop through all lines
-
-  s.printTable();
-
-  //c.decode();
 }//second pass
+
+void code(){
+  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
+  c.decode();
+}//code
 
 void writeToFile() {
   String finalFile = file;
