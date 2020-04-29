@@ -55,14 +55,16 @@ void draw() {
   p.analyzeFile(); //takes out comments, analyzes a/label/c, determine comp/dest/jump
 
   initStrings(); //initializes all of the stringlists
-  //  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
-
+  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
+  
   s.predefinedSymbols(); //predefined symbols
 
   firstPass();
   //s.printTable();
   secondPass();
   //s.printTable();
+
+  c.checkCode();
 
   //writeToFile();
 }//end draw
@@ -84,16 +86,18 @@ void secondPass() {
   for (int i = 0; i < allTypes.size(); i++) {
     if (allTypes.get(i) == "a") {
       if (s.hasSymbol(allLines.get(i)) == false) {
+        //println("NEW! " + allLines.get(i));
         s.addSymbol(allLines.get(i));//add symbol
       }//if the symbol isn't there
       else {
+        //println("Olddd " + allLines.get(i));
         String newAddress = s.getAddress(allLines.get(i));
         allA.set(i, newAddress); //
       }//if the symbol is there
     }//if it's an a command
   }//for loop through all lines
 
-  c.decode();
+  //c.decode();
 }//second pass
 
 void writeToFile() {
