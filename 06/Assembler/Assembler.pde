@@ -37,6 +37,8 @@ void setup() {
   allA = new StringList();
   allLines = new StringList();
   allLabels = new StringList();
+
+  s.predefinedSymbols(); //predefined symbols
 }//end setup
 
 void initStrings() {
@@ -56,13 +58,13 @@ void draw() {
 
   initStrings(); //initializes all of the stringlists
   c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
-  
-  s.predefinedSymbols(); //predefined symbols
 
+  //println(allLines);
   firstPass();
   //s.printTable();
   secondPass();
   //s.printTable();
+  println("--------------------");
 
   //c.checkCode();
 
@@ -74,9 +76,11 @@ void firstPass() {
   //println(allTypes.size());
   for (int i = 0; i < allTypes.size(); i++) {
     //println(allTypes.get(i));
-    if (allTypes.get(i).equals("l")) {
+   // println(i);
+    if ((s.hasSymbol(allLines.get(i)) == false) && (allTypes.get(i).equals("l"))) {
+      //println("True");
       labelName = allLabels.get(i); //get label name
-      //println(i + " " + labelName);
+      //println(i+1 + " " + labelName);
       s.addSymbol(labelName, i+1); //add label name and ROM address
     }//if it's a label
   }//loop through lines
@@ -85,19 +89,22 @@ void firstPass() {
 void secondPass() {
   for (int i = 0; i < allTypes.size(); i++) {
     if (allTypes.get(i) == "a") {
-      if (s.hasSymbol(allLines.get(i)) == false) {
-        //println("NEW! " + allLines.get(i));
-        s.addSymbol(allLines.get(i));//add symbol
+      if (s.hasSymbol(allA.get(i)) == false) {
+        //println("NEW! " + allA.get(i));
+        s.addSymbol(allA.get(i));//add symbol
       }//if the symbol isn't there
       else {
-        //println("Olddd " + allLines.get(i));
-        String newAddress = s.getAddress(allLines.get(i));
-        allA.set(i, newAddress); //
+        //println("Old " + allA.get(i));
+        String newAddress = s.getAddress(allA.get(i));
+        allA.set(i, newAddress); //add symbol
+        //println("New add " + newAddress);
       }//if the symbol is there
     }//if it's an a command
   }//for loop through all lines
 
-  c.decode();
+  s.printTable();
+
+  //c.decode();
 }//second pass
 
 void writeToFile() {

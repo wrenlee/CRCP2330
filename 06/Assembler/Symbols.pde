@@ -40,12 +40,16 @@ class Symbols {
   String getAddress(String oldStr) {
     String newAdd = ""; //new address
     int slotNum = 0;
+    //println("Old " + oldStr);
     for (int i = 0; i < symbols.size(); i++) {
       if (symbols.get(i).equals(oldStr) == true) {
         slotNum = i; //sets slot num
       }//if string then get slot num
-      newAdd = addresses.get(slotNum);//gets the address from the symbols table
     }//loop through symbols list
+    newAdd = addresses.get(slotNum);//gets the address from the symbols table
+    //println("SLot " + slotNum);
+    //println("new " + newAdd);
+    //println("--------------------");
     return newAdd;
   }//get address
 
@@ -63,10 +67,10 @@ class Symbols {
     String index = Integer.toString(loc);
     addresses.append(index); //add address
   }//add symbol
-  
-  void printTable(){
-    for(int i = 0; i < symbols.size(); i++){
-      println(symbols.get(i) + " | " + addresses.get(i));
+
+  void printTable() {
+    for (int i = 0; i < symbols.size(); i++) {
+      println(i + " " + symbols.get(i) + " | " + addresses.get(i));
     }//for loop
   }//print table
 
