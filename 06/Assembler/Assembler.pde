@@ -37,7 +37,7 @@ void setup() {
   allA = new StringList();
   allLines = new StringList();
   allLabels = new StringList();
-  
+
   s.predefinedSymbols(); //predefined symbols
 }//end setup
 
@@ -58,13 +58,12 @@ void draw() {
 
   initStrings(); //initializes all of the stringlists
 
-  //println(allLines);
   firstPass();
   //s.printTable();
   secondPass();
   //s.printTable();
   //println("--------------------");
-  
+
   //code();
 
   //c.checkCode();
@@ -74,14 +73,13 @@ void draw() {
 
 void firstPass() {
   String labelName = ""; //label name
-  //println(allTypes.size());
   for (int i = 0; i < allTypes.size(); i++) {
     //println(allTypes.get(i));
-    // println(i);
+    println(i);
     if (allTypes.get(i).equals("l")) {
       //println("True");
       labelName = allLabels.get(i); //get label name
-      println(i+1 + " " + labelName);
+      //println(i+1 + " " + labelName);
       s.addSymbol(labelName, i+1); //add label name and ROM address
     }//if it's a label
   }//loop through lines
@@ -104,7 +102,7 @@ void secondPass() {
   }//for loop through all lines
 }//second pass
 
-void code(){
+void code() {
   c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
   c.decode();
 }//code
