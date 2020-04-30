@@ -59,8 +59,8 @@ void draw() {
   initStrings(); //initializes all of the stringlists
 
   firstPass();
-  //s.printTable();
-  secondPass();
+  s.printTable();
+  //secondPass();
   //s.printTable();
   //println("--------------------");
 
@@ -73,16 +73,22 @@ void draw() {
 
 void firstPass() {
   String labelName = ""; //label name
-  for (int i = 0; i < allTypes.size(); i++) {
-    //println(allTypes.get(i));
+  //int rom = 0;
+  for (int i = 0; i < allLabels.size(); i++) {
     println(i);
-    if (allTypes.get(i).equals("l")) {
+    //println(allTypes.get(i));
+    //println(i);
+    if (allLabels.get(i) != null) {
       //println("True");
       labelName = allLabels.get(i); //get label name
       //println(i+1 + " " + labelName);
       s.addSymbol(labelName, i+1); //add label name and ROM address
     }//if it's a label
+    //else if (allTypes.get(i) == "a" || allTypes.get(i) == "c"){
+    //  rom++;
+    //}
   }//loop through lines
+  println("Pass!");
 }//first pass
 
 void secondPass() {
