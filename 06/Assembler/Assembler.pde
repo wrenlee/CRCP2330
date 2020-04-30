@@ -59,10 +59,10 @@ void draw() {
   initStrings(); //initializes all of the stringlists
 
   firstPass();
+ // s.printTable();
+  secondPass();
   s.printTable();
-  //secondPass();
-  //s.printTable();
-  //println("--------------------");
+  println("--------------------");
 
   //code();
 
@@ -78,7 +78,7 @@ void firstPass() {
     println(i);
     //println(allTypes.get(i));
     //println(i);
-    if (allLabels.get(i) != null) {
+    if (allLabels.get(i) != null && s.hasSymbol(allLabels.get(i))==false) {
       //println("True");
       labelName = allLabels.get(i); //get label name
       //println(i+1 + " " + labelName);
