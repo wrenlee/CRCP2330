@@ -21,6 +21,9 @@ StringList allA;
 StringList allLines;
 StringList allLabels;
 
+boolean firstPassDone = false;
+boolean secondPassDone = false;
+
 void setup() {
   file = "Max"; //STEP 1: NAME YOUR FILE
   fileAsm = file + ".asm"; //creates file
@@ -59,13 +62,17 @@ void draw() {
   initStrings(); //initializes all of the stringlists
 
   firstPass();
-  // s.printTable();
-  secondPass();
   //s.printTable();
-  println("--------------------");
+  //if(firstPassDone == true){
+  secondPass();
+  //}
+  //s.printTable();
+  //println("--------------------");
 
+//if(firstPassDone == true && secondPassDone == true){
   c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
-  c.decode();
+  //c.decode();
+//}//first and second pass done
   //code();
 
   //c.checkCode();
@@ -74,39 +81,40 @@ void draw() {
 }//end draw
 
 void firstPass() {
+  println("First");
   String labelName = ""; //label name
-  //int rom = 0;
+  int rom = 0;
   for (int i = 0; i < allLabels.size(); i++) {
-    println(i);
-    //println(allTypes.get(i));
-    //println(i);
     if (allLabels.get(i) != null && s.hasSymbol(allLabels.get(i))==false) {
-      //println("True");
       labelName = allLabels.get(i); //get label name
-      //println(i+1 + " " + labelName);
-      s.addSymbol(labelName, i+1); //add label name and ROM address
+      s.addSymbol(labelName, rom+1); //add label name and ROM address
     }//if it's a label
-    //else if (allTypes.get(i) == "a" || allTypes.get(i) == "c"){
-    //  rom++;
-    //}
+    else {
+      rom++;
+    }//if it's a or c command
   }//loop through lines
+// firstPassDone = true;
 }//first pass
 
 void secondPass() {
+  println("Second");
+//  if(firstPassDone == true){
   for (int i = 0; i < allA.size(); i++) {
     if (allTypes.get(i) == "a") {
       if (s.hasSymbol(allA.get(i)) == false) {
-        //println("NEW! " + allA.get(i));
+        println("NEW! " + allA.get(i));
         s.addSymbol(allA.get(i));//add symbol
       }//if the symbol isn't there
       else {
-        // println("Old " + allA.get(i));
+        println("Old " + allA.get(i));
         String newAddress = s.getAddress(allA.get(i));
         allA.set(i, newAddress); //add symbol
-        // println("New add " + newAddress);
+        //println("New add " + newAddress);
       }//if the symbol is there
     }//if it's an a command
   }//for loop through all lines
+ // }//first pass true
+ // secondPassDone = true;
 }//second pass
 
 void code() {
