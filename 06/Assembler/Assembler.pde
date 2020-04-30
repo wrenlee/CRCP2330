@@ -59,11 +59,13 @@ void draw() {
   initStrings(); //initializes all of the stringlists
 
   firstPass();
- // s.printTable();
+  // s.printTable();
   secondPass();
-  s.printTable();
+  //s.printTable();
   println("--------------------");
 
+  c.init(allTypes, allComp, allDest, allJump, allA); //initizalies stringlists in code class
+  c.decode();
   //code();
 
   //c.checkCode();
@@ -88,11 +90,10 @@ void firstPass() {
     //  rom++;
     //}
   }//loop through lines
-  println("Pass!");
 }//first pass
 
 void secondPass() {
-  for (int i = 0; i < allTypes.size(); i++) {
+  for (int i = 0; i < allA.size(); i++) {
     if (allTypes.get(i) == "a") {
       if (s.hasSymbol(allA.get(i)) == false) {
         //println("NEW! " + allA.get(i));
