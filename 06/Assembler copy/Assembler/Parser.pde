@@ -8,28 +8,27 @@ class Parser {
   StringList line;
   int lineNum = 0;
 
-  Parser() {
-    
+  Parser(String file) {
+    reader = createReader(file); //create reader file
     line = new StringList(); //create stringlist
   }//constructor
 
-  void readFile(String file) {
-        reader = createReader(file); //create reader file
+  void readFile() {
+    String tempLine = "";
     while (finished==false) {
       try {
-        line.append(reader.readLine()); //adds line to stringlist
+        tempLine = reader.readLine();
+        line.append(tempLine); //adds line to stringlist
       }//end try
       catch(IOException e) {
-        //println("HI!");
         e.printStackTrace();
-        line = null;
+        tempLine = null;
       }//catch
 
-      if (line == null) {
+      if (tempLine == null) {
         finished = true;
       }//null
     }//while
-    println(line);
   }//read file
 
   boolean hasMoreCommands() {

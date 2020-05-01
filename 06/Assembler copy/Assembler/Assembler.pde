@@ -16,10 +16,10 @@ Symbols s;
 StringList binary;
 
 void setup() {
-  file = "Max"; //STEP 1: NAME YOUR FILE
+  file = "Max"; 
   file = file + ".asm"; //creates file
 
-  p = new Parser();
+  p = new Parser(file);
   c = new Code();
   s = new Symbols();
 
@@ -28,11 +28,11 @@ void setup() {
 
   s.predefinedSymbols(); //predefined symbols
 
-  //noLoop();
+  noLoop();
 }//end setup
 
 void draw() {
-  p.readFile(file); //adds strings to string list
+  p.readFile(); //adds strings to string list
 
   //firstPass();
   //secondPass();
