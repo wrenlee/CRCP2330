@@ -34,7 +34,8 @@ void setup() {
 void draw() {
   p.readFile(); //adds strings to string list
 
-  //firstPass();
+  firstPass();
+ // s.printTable();
   //secondPass();
   //s.printTable();
   //println("--------------------");
@@ -48,8 +49,9 @@ void firstPass() {
   int rom = 0;
   while (p.hasMoreCommands()==true) {
     p.advance();
-    if (p.currentString().startsWith("//") == false && p.currentString().isEmpty() == true) {
+    if (p.currentString().startsWith("//") == false && p.currentString().isEmpty() == false) {
       if (p.currentType() == "l") {//if it's a label
+        println(p.currentString());
         int length = p.currentString().length();
         labelName = p.currentString().substring(1, length-1);//get label name w/o parenthesis
         s.addSymbol(labelName, rom+1); //add label name and ROM address
@@ -68,18 +70,10 @@ void secondPass() {
     p.advance();
 
     if (p.currentString().startsWith("//") == false && p.currentString().isEmpty() == true) {
-      String curString = p.currentString();
-
-      if (p.currentString().contains("//")) {
-        String[] tempStr = new String[2];
-        tempStr = p.currentString().split("//"); //splits comment
-        String temp = tempStr[0];
-        curString = temp.trim();
-      }//if there is a comment
 
       if (p.currentType() == "a") {
         int length = p.currentString().length();
-        String aCommand = curString.substring(1, length);//takes out the @ symbol
+        String aCommand = p.currentString().substring(1, length);//takes out the @ symbol
         String newAddress = "";
         if (s.hasSymbol(aCommand) == false) {
           s.addSymbol(aCommand, ram);//add symbol
@@ -97,16 +91,16 @@ void secondPass() {
         String comp = "";
         String dest = "";
         String jump = "";
-        if (curString.contains("=")==true) { //dest = comp
-          tempStr = curString.split("=");
+        if (p.currentString().contains("=")==true) { //dest = comp
+          tempStr = p.currentString().split("=");
           dest = tempStr[0];
           comp = tempStr[1];
         }//comp + dest
         else {
           dest = "0";
         }//if there is no dest
-        if (curString.contains(";")==true) {//comp;jump
-          tempStr = curString.split(";");
+        if (p.currentString().contains(";")==true) {//comp;jump
+          tempStr = p.currentString().split(";");
           comp = tempStr[0];
           jump = tempStr[1];
         }//comp + jump

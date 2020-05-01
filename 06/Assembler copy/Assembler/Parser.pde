@@ -5,35 +5,40 @@
 class Parser {
   BufferedReader reader;
   boolean finished = false;
-  StringList line;
+  StringList allLines;
   int lineNum = 0;
 
   Parser(String file) {
     reader = createReader(file); //create reader file
-    line = new StringList(); //create stringlist
+    allLines = new StringList();
   }//constructor
 
   void readFile() {
-    String tempLine = "";
+    String line;
     while (finished==false) {
       try {
-        tempLine = reader.readLine();
-        line.append(tempLine); //adds line to stringlist
+        line = reader.readLine(); //reads line
       }//end try
       catch(IOException e) {
         e.printStackTrace();
-        tempLine = null;
+        line = null;
       }//catch
 
-      if (tempLine == null) {
+      if (line == null) {
         finished = true;
       }//null
+      else{
+       allLines.append(line);
+      }//put line into all lines
     }//while
   }//read file
 
   boolean hasMoreCommands() {
-    //if finished is true, then there are not more commands (more commands false)
-    return !finished;
+    boolean moreCommands = true;
+    if(lineNum+1 >= allLines.size()){
+      moreCommands = false;
+    }//if the current line number 
+    return moreCommands;
   }//if there are more commands
 
   void advance() {
@@ -41,7 +46,16 @@ class Parser {
   }//advance
 
   String currentString() {
-    return line.get(lineNum);
+    String curString = allLines.get(lineNum);
+    
+    if (curString.contains("//")) {
+        String[] tempStr = new String[2];
+        tempStr = curString.split("//"); //splits comment
+        String temp = tempStr[0];
+        curString = temp.trim();
+      }//if there is a comment
+      
+    return curString;
   }//current string 
 
   String currentType() {
@@ -55,6 +69,7 @@ class Parser {
     else {
       type = "c";
     }//c instruction
+    //println(type + " -> " + currentString());
     return type;
   }//current type
 }//class definition
