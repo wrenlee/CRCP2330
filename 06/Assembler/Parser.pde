@@ -4,6 +4,7 @@
 
 class Parser {
   BufferedReader reader;
+  boolean finished;
   StringList line;
   StringList typeList;
   StringList comp, dest, jump;
@@ -19,21 +20,30 @@ class Parser {
     jump = new StringList();
     aInstruct = new StringList();
     labels = new StringList();
+    finished = false;
   }//constructor
 
   void readFile() {
-    try {
-      line.append(reader.readLine()); //adds line to stringlist
-    }//end try
-    catch(IOException e) {
-      e.printStackTrace();
-    }//catch
+    while (!finished) {
+      try {
+        line.append(reader.readLine()); //adds line to stringlist
+      }//end try
+      catch(IOException e) {
+        e.printStackTrace();
+        line = null;
+      }//catch
 
-    for (int i = 0; i < line.size(); i++) {
-      if (line.get(i) == null) {   
-        noLoop(); //stop loop if out of text
-      }//if null stop
-    }//for loop
+      if (line == null) {
+        finished = true;
+      }
+    }
+
+    //for (int i = 0; i < line.size(); i++) {
+    //  if (line.get(i) == null) {   
+    //    break;
+    //    //noLoop(); //stop loop if out of text
+    //  }//if null stop
+    //}//for loop
   }//read file
 
   void analyzeFile() {
@@ -42,14 +52,14 @@ class Parser {
       String tempLine = line.get(i);
       String trimString = tempLine.trim(); //trims excess white space
       line.set(i, trimString);
-      
+
       typeList.set(i, commandType(i));//determines command type
       cInstruction(i);
       symbols(i);
       //println(i + " " + line.get(i) + " --> " + typeList.get(i));
       //println(i + " " + line.get(i));
     }//for line loop
-   // println("-------------------------");//line break
+    // println("-------------------------");//line break
   }//end analyze file
 
   void cleanComments() {
@@ -158,8 +168,8 @@ class Parser {
   StringList lines() {
     return line;
   }//returns all lines w/ comments cleaned out
-  
-  StringList labels(){
+
+  StringList labels() {
     return labels;
   }//returns all labels w/o parenthesis
 }//class definition
