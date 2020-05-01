@@ -3,7 +3,7 @@
  crcp 2330 - nand 2 tetris
  
  to get started with the assembler, first name your file in the void setup()
- */
+*/
 
 //variables
 String file, fileAsm;
@@ -70,7 +70,7 @@ void draw() {
     secondPass(i);
   }//second pass
   //}
-  s.printTable();
+  //s.printTable();
   //println("--------------------");
 
   //if(firstPassDone == true && secondPassDone == true){
@@ -85,6 +85,7 @@ void draw() {
 }//end draw
 
 void firstPass(int i) {
+  println(i + " first");
  //println("First");
   String labelName = ""; //label name
   //int rom = 0;
@@ -102,16 +103,17 @@ void firstPass(int i) {
 }//first pass
 
 void secondPass(int i) {
+  println(i + " second");
  // println("Second");
   //  if(firstPassDone == true){
   // for (int i = 0; i < allA.size(); i++) {
   if (allTypes.get(i) == "a") {
     if (s.hasSymbol(allA.get(i)) == false) {
-      println("NEW! " + allA.get(i));
+      //println("NEW! " + allA.get(i));
       s.addSymbol(allA.get(i));//add symbol
     }//if the symbol isn't there
     else {
-      println("Old " + allA.get(i));
+     // println("Old " + allA.get(i));
       String newAddress = s.getAddress(allA.get(i));
       allA.set(i, newAddress); //add symbol
       //println("New add " + newAddress);
