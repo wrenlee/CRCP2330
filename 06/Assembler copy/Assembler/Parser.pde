@@ -4,32 +4,32 @@
 
 class Parser {
   BufferedReader reader;
-  boolean finished;
+  boolean finished = false;
   StringList line;
   int lineNum = 0;
 
-  Parser(String file) {
-    reader = createReader(file); //create reader file
+  Parser() {
+    
     line = new StringList(); //create stringlist
-    finished = false;
   }//constructor
 
-  void readFile() {
-    while (!finished) {
+  void readFile(String file) {
+        reader = createReader(file); //create reader file
+    while (finished==false) {
       try {
         line.append(reader.readLine()); //adds line to stringlist
-        println(reader.readLine());
       }//end try
       catch(IOException e) {
+        //println("HI!");
         e.printStackTrace();
         line = null;
       }//catch
 
       if (line == null) {
         finished = true;
-      }
-    }
-    println(line.size());
+      }//null
+    }//while
+    println(line);
   }//read file
 
   boolean hasMoreCommands() {

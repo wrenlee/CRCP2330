@@ -6,7 +6,7 @@
  */
 
 //variables
-String file, fileAsm;
+String file;
 PrintWriter writer;
 
 Parser p;
@@ -17,9 +17,9 @@ StringList binary;
 
 void setup() {
   file = "Max"; //STEP 1: NAME YOUR FILE
-  fileAsm = file + ".asm"; //creates file
+  file = file + ".asm"; //creates file
 
-  p = new Parser(fileAsm);
+  p = new Parser();
   c = new Code();
   s = new Symbols();
 
@@ -32,7 +32,7 @@ void setup() {
 }//end setup
 
 void draw() {
-  p.readFile(); //adds strings to string list
+  p.readFile(file); //adds strings to string list
 
   //firstPass();
   //secondPass();
