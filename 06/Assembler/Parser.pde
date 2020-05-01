@@ -95,6 +95,7 @@ class Parser {
       jump.set(i, "0");
     }//a instruction
     else if (typeList.get(i) == "l") {
+      //symbol = line.get(i);
       symbol = line.get(i).substring(1, length-1); //takes out parenthesis
       labels.set(i, symbol);
       //println(symbol);

@@ -64,6 +64,7 @@ class Symbols {
   }//add variables
 
   void addSymbol(String name, int loc) {
+    //String symb = name.substring(1, name.length()-1);
     symbols.append(name); //add name to end of symbols table
 
     String index = Integer.toString(loc);

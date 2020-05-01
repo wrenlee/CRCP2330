@@ -61,16 +61,16 @@ void draw() {
 
   initStrings(); //initializes all of the stringlists
 
-  for (int i = 0; i < allLabels.size(); i++) {
+  for (int i = 0; i < allTypes.size(); i++) {
     firstPass(i);
   }//first pass
   //s.printTable();
   //if(firstPassDone == true){
-  for (int i = 0; i < allA.size(); i++) {
+  for (int i = 0; i < allTypes.size(); i++) {
     secondPass(i);
   }//second pass
   //}
-  //s.printTable();
+  s.printTable();
   //println("--------------------");
 
   //if(firstPassDone == true && secondPassDone == true){
@@ -85,11 +85,12 @@ void draw() {
 }//end draw
 
 void firstPass(int i) {
-  println("First");
+ //println("First");
   String labelName = ""; //label name
   //int rom = 0;
   // for (int i = 0; i < allLabels.size(); i++) {
-  if (allLabels.get(i) != null && s.hasSymbol(allLabels.get(i))==false) {
+    //  if (allLabels.get(i) != null && s.hasSymbol(allLabels.get(i))==false) {
+  if (allTypes.get(i) == "l" && s.hasSymbol(allLabels.get(i))==false) {
     labelName = allLabels.get(i); //get label name
     s.addSymbol(labelName, i+1); //add label name and ROM address
   }//if it's a label
@@ -101,12 +102,12 @@ void firstPass(int i) {
 }//first pass
 
 void secondPass(int i) {
-  println("Second");
+ // println("Second");
   //  if(firstPassDone == true){
   // for (int i = 0; i < allA.size(); i++) {
   if (allTypes.get(i) == "a") {
     if (s.hasSymbol(allA.get(i)) == false) {
-     println("NEW! " + allA.get(i));
+      println("NEW! " + allA.get(i));
       s.addSymbol(allA.get(i));//add symbol
     }//if the symbol isn't there
     else {
