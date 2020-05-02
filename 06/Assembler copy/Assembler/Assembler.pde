@@ -17,7 +17,7 @@ Symbols s;
 StringList binary;
 
 void setup() {
-  file = "MaxL"; 
+  file = "RectL"; 
   fileAsm = file + ".asm"; //creates file
 
   p = new Parser(fileAsm);
@@ -72,14 +72,15 @@ void secondPass() {
         int length = p2.currentString().length();
         String aCommand = p2.currentString().substring(1, length);//takes out the @ symbol
         String address = "";
-        if (s.hasSymbol(aCommand) == false) {
-          //println(aCommand + " " + "isn't there");
-          s.addSymbol(aCommand, ram);//add symbol
+        if(isNum(aCommand) == true){
           address = aCommand;
+        }//if it's a number
+        else if (s.hasSymbol(aCommand) == false) {
+          s.addSymbol(aCommand, ram);//add symbol
+          address = Integer.toString(ram);
           ram++; //increase ram
         }//if the symbol isn't there
         else {
-          //println(aCommand + " " + "is there");
           address = s.getAddress(aCommand);
         }//if the symbol is there
         binary.append(c.aToBinary(address));
@@ -113,6 +114,21 @@ void secondPass() {
     }//not comment or empty space
   }//has more commands
 }//second pass
+
+boolean isNum(String str){
+  //println(str);
+    //code from https://www.baeldung.com/java-check-string-number
+    if(str == null){
+      return false;
+    }//if empty
+    try{
+      int address = Integer.parseInt(str);
+    }//try
+    catch(NumberFormatException nfe){
+      return false;
+    }//catch
+    return true;
+  }//is num
 
 void writeToFile() {
   String finalFile = file;

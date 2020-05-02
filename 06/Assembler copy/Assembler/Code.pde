@@ -13,7 +13,7 @@ class Code {
   }//constructor
 
   String aToBinary(String address) {
-    println(address);
+    //println(address);
     String aBin = ""; //binary w/o leading zeros
     int aTemp = Integer.parseInt(address); //convert string to number
     aBin = Integer.toBinaryString(aTemp); //convert number to binary string
