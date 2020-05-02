@@ -13,7 +13,7 @@ class Code {
   }//constructor
 
   String aToBinary(String address) {
-    String binary = ""; //final binary address
+    println(address);
     
     String aBin = ""; //binary w/o leading zeros
     int aTemp = Integer.parseInt(address); //convert string to number
@@ -27,8 +27,8 @@ class Code {
     }//if it's not 16 long
 
     zeros = zeros + aBin; //add binary value and zeros
-
-    return binary;
+    println(zeros);
+    return zeros;
   }//a to binary
 
   String cToBinary(String comp, String dest, String jump) {

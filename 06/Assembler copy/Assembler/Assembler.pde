@@ -6,7 +6,7 @@
  */
 
 //variables
-String file;
+String file, fileAsm;
 PrintWriter writer;
 
 Parser p;
@@ -17,9 +17,9 @@ StringList binary;
 
 void setup() {
   file = "Max"; 
-  file = file + ".asm"; //creates file
+  fileAsm = file + ".asm"; //creates file
 
-  p = new Parser(file);
+  p = new Parser(fileAsm);
   c = new Code();
   s = new Symbols();
 
@@ -35,23 +35,21 @@ void draw() {
   p.readFile(); //adds strings to string list
 
   firstPass();
- // s.printTable();
-  //secondPass();
+  secondPass();
   //s.printTable();
   //println("--------------------");
 
-  //writeToFile();
+ // writeToFile();
 }//end draw
 
 void firstPass() {
-  println("First");
+  //println("First");
   String labelName = ""; //label name
   int rom = 0;
   while (p.hasMoreCommands()==true) {
     p.advance();
     if (p.currentString().startsWith("//") == false && p.currentString().isEmpty() == false) {
       if (p.currentType() == "l") {//if it's a label
-        println(p.currentString());
         int length = p.currentString().length();
         labelName = p.currentString().substring(1, length-1);//get label name w/o parenthesis
         s.addSymbol(labelName, rom+1); //add label name and ROM address
@@ -65,23 +63,25 @@ void firstPass() {
 
 void secondPass() {
   int ram = 16; 
-  println("Second");
+  //println("Second");
   while (p.hasMoreCommands()==true) {
     p.advance();
-
-    if (p.currentString().startsWith("//") == false && p.currentString().isEmpty() == true) {
+    if (p.currentString().startsWith("//") == false && p.currentString().isEmpty() == false) {
 
       if (p.currentType() == "a") {
         int length = p.currentString().length();
         String aCommand = p.currentString().substring(1, length);//takes out the @ symbol
         String newAddress = "";
         if (s.hasSymbol(aCommand) == false) {
+          println(p.currentString() + " " + "isn't there");
           s.addSymbol(aCommand, ram);//add symbol
           ram++; //increase ram
         }//if the symbol isn't there
         else {
+          println(p.currentString() + " " + "is there");
           newAddress = s.getAddress(aCommand);
         }//if the symbol is there
+        println(c.aToBinary(newAddress));
         binary.append(c.aToBinary(newAddress));
       }//a command
 
@@ -124,5 +124,4 @@ void writeToFile() {
 
   writer.flush(); 
   writer.close();
-  println(finalFile + " is published!");
 }//write to file
