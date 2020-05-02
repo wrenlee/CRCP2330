@@ -27,15 +27,15 @@ class Parser {
       if (line == null) {
         finished = true;
       }//null
-      else{
-       allLines.append(line);
+      else {
+        allLines.append(line);
       }//put line into all lines
     }//while
   }//read file
 
   boolean hasMoreCommands() {
     boolean moreCommands = true;
-    if(lineNum+1 >= allLines.size()){
+    if (lineNum+1 >= allLines.size()) {
       moreCommands = false;
     }//if the current line number 
     return moreCommands;
@@ -47,14 +47,15 @@ class Parser {
 
   String currentString() {
     String curString = allLines.get(lineNum);
-    
+
     if (curString.contains("//")) {
-        String[] tempStr = new String[2];
-        tempStr = curString.split("//"); //splits comment
-        String temp = tempStr[0];
-        curString = temp.trim();
-      }//if there is a comment
-      
+      String[] tempStr = new String[2];
+      tempStr = curString.split("//"); //splits comment
+      String temp = tempStr[0];
+      curString = temp.trim();
+    }//if there is a comment
+
+    curString = curString.trim(); //trim any space
     return curString;
   }//current string 
 

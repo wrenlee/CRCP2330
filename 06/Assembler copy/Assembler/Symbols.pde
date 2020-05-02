@@ -51,6 +51,40 @@ class Symbols {
   }//print table
 
   void predefinedSymbols() { //add of the 23 predefined symbols
+  symbols.append("0");
+    addresses.append("0");
+    symbols.append("1");
+    addresses.append("1");
+    symbols.append("2");
+    addresses.append("2");
+    symbols.append("3");
+    addresses.append("3");
+    symbols.append("4");
+    addresses.append("4");
+    symbols.append("5");
+    addresses.append("5");
+    symbols.append("6");
+    addresses.append("6");
+    symbols.append("7");
+    addresses.append("7");
+    symbols.append("8");
+    addresses.append("8");
+    symbols.append("9");
+    addresses.append("9");
+    symbols.append("10");
+    addresses.append("10");
+    symbols.append("11");
+    addresses.append("11");
+    symbols.append("12");
+    addresses.append("12");
+    symbols.append("13");
+    addresses.append("13");
+    symbols.append("14");
+    addresses.append("14");
+    symbols.append("15");
+    addresses.append("15");
+    
+    //rs
     symbols.append("R0");
     addresses.append("0");
     symbols.append("R1");
@@ -83,10 +117,14 @@ class Symbols {
     addresses.append("14");
     symbols.append("R15");
     addresses.append("15");
+    
+    //screens + kbd
     symbols.append("SCREEN");
     addresses.append("16384");
     symbols.append("KBD");
     addresses.append("24576");
+    
+    //other symbols
     symbols.append("SP");
     addresses.append("0");
     symbols.append("LCL");

@@ -14,7 +14,6 @@ class Code {
 
   String aToBinary(String address) {
     println(address);
-    
     String aBin = ""; //binary w/o leading zeros
     int aTemp = Integer.parseInt(address); //convert string to number
     aBin = Integer.toBinaryString(aTemp); //convert number to binary string
@@ -27,7 +26,6 @@ class Code {
     }//if it's not 16 long
 
     zeros = zeros + aBin; //add binary value and zeros
-    println(zeros);
     return zeros;
   }//a to binary
 
@@ -46,12 +44,12 @@ class Code {
     //begin comp
 
     //a, 12
-      if (comp.contains("M")) {
-        cTemp.set(3, 1);
-      }//a = 1 w/ m
-      else {
-        cTemp.set(3, 0);
-      }//a = 0 w/o m
+    if (comp.contains("M")) {
+      cTemp.set(3, 1);
+    }//a = 1 w/ m
+    else {
+      cTemp.set(3, 0);
+    }//a = 0 w/o m
 
     if (comp.equals("0")) {
       cTemp.set(4, 1);
@@ -198,7 +196,7 @@ class Code {
       cTemp.set(9, 1);
     }//D|A D|M
     //end of comp
-    
+
     //begin of dest
     String destTemp = ""; //holds dest
     if (dest.equals("0")) {
@@ -242,7 +240,7 @@ class Code {
     else {
       jumpTemp = jump;
     }//if jump has something
-    
+
     if (jumpTemp.equals("JGT")) {
       cTemp.set(13, 0);
       cTemp.set(14, 0);
@@ -285,6 +283,6 @@ class Code {
       cStrTemp = cStrTemp + cTemp.get(k);
     }//loop through temp and add to temp string
 
-return cStrTemp;
+    return cStrTemp;
   }//c to binary
 }//class definition end
